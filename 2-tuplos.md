@@ -366,7 +366,7 @@ No próximo capítulo, continuamos a nossa análise das novidades introduzidas p
 ["Tupples"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/csharp-7#tuples) <br>
 ["Why do C# 7 Value Tuples implement the Equals method but not the double equals operator"](http://stackoverflow.com/questions/42170040/why-do-c-sharp-7-valuetuples-implement-the-equals-method-but-not-the-double-equa) <br>
 ["Support for == and != on ValueTuple"](https://github.com/dotnet/roslyn/issues/13155) <br>
-["Quickstart guide for tuples"(]https://github.com/dotnet/roslyn/blob/master/docs/features/tuples.md) <br>
+["Quickstart guide for tuples"](https://github.com/dotnet/roslyn/blob/master/docs/features/tuples.md) <br>
 ["Tuples in C# 7"](https://www.thomaslevesque.com/2016/07/25/tuples-in-c-7/) <br>
 ["Tackling Tuples: Understanding the new C# 7 Value Type"](http://our.componentone.com/2017/01/30/tackling-tuples-understanding-the-new-c-7-value-type/) <br>
 
