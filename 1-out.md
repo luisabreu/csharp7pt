@@ -63,7 +63,7 @@ static class Informacao
 
 Note-se ainda como a invocação de métodos que possuem parâmetros deste tipo também obriga ao uso do modificador `ref`. Para além disso, importa ainda reter que uma variável só pode ser passada a um parâmetro depois de ser inicializada (portanto, se não tivéssemos atribuído o valor 10 à variável idade, esta não poderia ter sido passada ao método `ImprimeIdade`).
 
-> **Parâmetros por referência vs tipos por referência**
+> **Parâmetros por referência vs tipos por referência**<br/>
 >Na literatura relacionada com a linguagem C# (e com a plataforma .NET), a designação “por referência" é utilizada para descrever conceitos diferentes, o que pode contribuir para confundir o leitor iniciado. Uma das confusões mais frequentes prende-se com a diferença entre tipos de parâmetros e tipos de objetos que podem ser criados em .NET. 
 Assim, os tipos de objetos criados em .NET podem ser caraterizados como tipos por referência ou como tipos por valor. Classes, interfaces e *delegates* são considerados tipos por referência. Por sua vez, as estruturas (`struct`) e enumerações (`enum`) são representadas por tipos por valor. 
 >As variáveis de tipos por referência guardam, como o próprio nome indica, uma referência para o local onde está o valor. Por outras palavras, os espaços de armazenamento das variáveis deste tipo contêm os endereços onde podemos encontrar os respetivos valores. Se quisermos, podemos pensar nas variáveis deste tipo como sendo apontadores para outros locais de memória que contêm o valor referenciado. Por sua vez, as variáveis do tipo por valor guardam diretamente um valor desse tipo. 
