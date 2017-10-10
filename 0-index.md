@@ -80,7 +80,7 @@ Apesar de contribuírem para um aumento da produtividade do programador, a verda
 Até ao lançamento do C# 7, o termo reservado `throw` estava reservado apenas para instruções. Na prática, isso significava que o seu uso estava proibido em determinados locais. Com a versão 7 da linguagem, este termo passa também a poder ser utilizado na construção de expressões. O Capítulo 8 analisa detalhadamente as vantagens introduzidas por esta alteração.
 
 
-### [Capítulo 9](numericliteralssyntax.md): Sintaxe dos literais numéricos
+### [Capítulo 9](9-numericliteralssyntax.md): Sintaxe dos literais numéricos
 
 Com o C# 7, passamos a poder representar números inteiros em formato binário. Para além disso, a legibilidade do código é melhorada através da introdução de um carácter que desempenha o papel de separador. Neste capítulo, apresentamos alguns exemplos que justificam a introdução desta funcionalidade e que mostram como a nova sintaxe pode contribuir para melhorar a legibilidade do código que escrevemos.
 
