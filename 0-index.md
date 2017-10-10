@@ -40,47 +40,47 @@ Por sua vez, as notas ou observações importantes poderão ser encontradas no i
 Este livro agrupa as várias novidades introduzidas pela nova especificação em 9 capítulos, que podem ser lidos sequencialmente ou, se o leitor assim o preferir, alternadamente (isto é, sem respeitar a ordem de capítulos apresentada). A leitura não sequencial dos capítulos é possível devido ao facto de todas as (poucas) dependências entre capítulos estarem devidamente identificadas.
 
 
-### Capítulo 1: Declaração de variáveis na lista de parâmetros de saída
+### [Capítulo 1](1-out.md): Declaração de variáveis na lista de parâmetros de saída
 
 O C# sempre suportou o conceito de parâmetro de saída. Tipicamente, estes parâmetros são utilizados por métodos que necessitam de devolver mais do que um valor. Como veremos neste capítulo, o trabalho necessário à utilização deste tipo de parâmetros é reduzido através do suporte à declaração de variáveis na lista de parâmetros de um método.
 
 
-### Capítulo 2: Tuploes (*Tuples*)
+### [Capítulo 2](2-tuplos.md): Tuploes (*Tuples*)
 
 Outra das novidades introduzidas pela versão 7 da linguagem são os tuplos (também conhecidos por *tuples*). Uma vez mais, estamos perante uma nova funcionalidade que tenta simplificar e reduzir o trabalho do programador em alguns cenários concretos. Com os tuplos, passamos a poder devolver mais do que um valor a partir de um método sem que isso implique o uso de parâmetros de saída ou a definição explícita de novos tipos. O Capítulo 2 analisa as principais caraterísticas associadas ao uso deste tipo de elementos.
 
 
-### Capítulo 3: Devolução de valores por referência
+### [Capítulo 3](3-refs.md): Devolução de valores por referência
 
 Até ao momento, o C# permitia a passagem de variáveis por referência a métodos através da utilização do qualificador `ref`. Com o lançamento da versão 7, a linguagem passa também a permitir a aplicação deste termo ao resultado devolvido por função. Na prática, isto significa que passamos poder aceder diretamente aos objetos devolvidos a partir de uma função, sem que isso implique a utilização direta de apontadores e a correspondente fixação de memória (*pinned objects*). Neste capítulo, apresentamos os principais aspetos relacionados com esta nova funcionalidade.
 
 
-### Capítulo 4: Expressões de correspondência de tipos através de padrões (*Patterns*)
+### [Capítulo 4](4-patterns.md): Expressões de correspondência de tipos através de padrões (*Patterns*)
 
 A partir do C# 7, a linguagem passa a permitir a definição de padrões mais complexos do que os suportados até ao momento. Assim, para além dos padrões que permitem efetuar comparações com valores primitivos (tipicamente utilizados em conjunto com a instrução `switch`), a linguagem passa ainda a permitir a definição de expressões baseadas nos tipos de um objeto. Apesar de esta funcionalidade não ser muito utilizada quando recorremos a programação orientada a objetos, a verdade é que tenderá a ser muito útil se necessitarmos de consumir bibliotecas criadas com uma aproximação mais funcional.
 
 
-### Capítulo 5: Tipos de retorno de métodos assíncronos
+### [Capítulo 5](5-asyncreturns.md): Tipos de retorno de métodos assíncronos
 
 O C# 5 introduziu o conceito de método assíncrono. Os métodos assíncronos contribuem para simplificar a criação e consumo de métodos que desempenham tarefas assíncronas. Como veremos neste capítulo, a versão 7 da linguagem levanta algumas das restrições aplicadas a este tipo de métodos, permitindo-nos, assim, melhorar a eficiência do código em alguns cenários.
 
 
-### Capítulo 6: Membros com corpos definidos por expressões
+### [Capítulo 6](6-expressionbodied.md): Membros com corpos definidos por expressões
 
 A versão 6 do C# introduziu o conceito de membros com corpos definidos por expressões. Na prática, este conceito reduzia alguma da cerimónia necessária à implementação de alguns tipos de membros que podem ser disponibilizados por uma classe. Com o C# 7, a lista de membros que podem ser definidos à custa deste tipo de expressões é expandida. O Capítulo 6 analisa as novidades introduzidas pela linguagem nesta área.
 
 
-### Capítulo 7: Funções locais
+### [Capítulo 7](7-localfunctions.md): Funções locais
 
 Apesar de contribuírem para um aumento da produtividade do programador, a verdade é que algumas das funcionalidades suportadas pelo C# obrigam a algum cuidado para não produzirem resultados "inesperados". Por exemplo, a implementação de *iterators* baseadas no uso do termo `yield` implica algum cuidado para que o seu consumo não resulte em alguns comportamentos "inesperados". Nestes cenários, a produção do comportamento "esperado" passava pela introdução de um método privado que, tipicamente, era invocado apenas a partir de um único local. Como veremos neste capítulo, o C# 7 permite-nos passar a definir este tipo de métodos no interior de outros.
 
 
-### Capítulo 8: Expressões *throw*
+### [Capítulo 8](8-throwexpressions.md): Expressões *throw*
 
 Até ao lançamento do C# 7, o termo reservado `throw` estava reservado apenas para instruções. Na prática, isso significava que o seu uso estava proibido em determinados locais. Com a versão 7 da linguagem, este termo passa também a poder ser utilizado na construção de expressões. O Capítulo 8 analisa detalhadamente as vantagens introduzidas por esta alteração.
 
 
-### Capítulo 9: Sintaxe dos literais numéricos
+### [Capítulo 9](numericliteralsSyntax.md): Sintaxe dos literais numéricos
 
 Com o C# 7, passamos a poder representar números inteiros em formato binário. Para além disso, a legibilidade do código é melhorada através da introdução de um carácter que desempenha o papel de separador. Neste capítulo, apresentamos alguns exemplos que justificam a introdução desta funcionalidade e que mostram como a nova sintaxe pode contribuir para melhorar a legibilidade do código que escrevemos.
 
