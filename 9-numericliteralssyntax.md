@@ -91,7 +91,7 @@ public enum Opcoes
 
 Nesta altura, o leitor pode sentir-se tentado a utilizar o separador de dígitos para separar o prefixo da base do número de forma a melhorar ainda mais a legibilidade do código. Infelizmente, isso não é possível, já que a linguagem não permite a colocação do separador de dígitos imediatamente a seguir ao prefixo nem no final do número.
 
-Por outras palavras, o código apresentado no excerto seguinte não compila:
+Por outras palavras, o código apresentado no excerto seguinte não compila: 
 
 ```cs
 var aux1 = 0b_0000_0001; // ERRO
