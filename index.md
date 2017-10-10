@@ -1,6 +1,6 @@
 # C# 7
 
-Este livro apresenta as principais novidades introduzidas pela versão 7 do C#. É gratuito (como em ["free as in beer"](https://www.howtogeek.com/howto/31717/what-do-the-phrases-free-speech-vs.-free-beer-really-mean/). Portanto, podem lê-lo descansadamente e, se assim o desejarem, podem recomendá-los aos vossos amigos e conhecidos.
+Este livro apresenta as principais novidades introduzidas pela versão 7 do C#. É gratuito (sim, como em ["free as in beer"](https://www.howtogeek.com/howto/31717/what-do-the-phrases-free-speech-vs.-free-beer-really-mean/)!). Portanto, podem lê-lo sem qualquer custo adicional e, se assim o desejarem, podem recomendá-los aos vossos amigos e conhecidos.
 
 Sugestões e correções são sempre bem vindas!
 
