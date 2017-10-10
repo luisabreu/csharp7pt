@@ -64,4 +64,4 @@ No próximo capítulo, vamos apresentar as principais caraterísticas relacionad
 
 ### Bibliografia
 
-["C#7: Throw Expressions and More Expression-bodied Members"](http://blog.somewhatabstract.com/2017/01/16/c7-throw-expressions-and-more-expression-bodied-members/) 
+["C#7: Throw Expressions and More Expression-bodied Members"](http://blog.somewhatabstract.com/2017/01/16/c7-throw-expressions-and-more-expression-bodied-members/)<br> 

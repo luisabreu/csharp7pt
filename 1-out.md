@@ -64,10 +64,9 @@ static class Informacao
 Note-se ainda como a invocação de métodos que possuem parâmetros deste tipo também obriga ao uso do modificador `ref`. Para além disso, importa ainda reter que uma variável só pode ser passada a um parâmetro depois de ser inicializada (portanto, se não tivéssemos atribuído o valor 10 à variável idade, esta não poderia ter sido passada ao método `ImprimeIdade`).
 
 > **Parâmetros por referência vs tipos por referência**<br/>
->Na literatura relacionada com a linguagem C# (e com a plataforma .NET), a designação “por referência" é utilizada para descrever conceitos diferentes, o que pode contribuir para confundir o leitor iniciado. Uma das confusões mais frequentes prende-se com a diferença entre tipos de parâmetros e tipos de objetos que podem ser criados em .NET. 
-Assim, os tipos de objetos criados em .NET podem ser caraterizados como tipos por referência ou como tipos por valor. Classes, interfaces e *delegates* são considerados tipos por referência. Por sua vez, as estruturas (`struct`) e enumerações (`enum`) são representadas por tipos por valor. <br>
+>Na literatura relacionada com a linguagem C# (e com a plataforma .NET), a designação “por referência" é utilizada para descrever conceitos diferentes, o que pode contribuir para confundir o leitor iniciado. Uma das confusões mais frequentes prende-se com a diferença entre tipos de parâmetros e tipos de objetos que podem ser criados em .NET. Assim, os tipos de objetos criados em .NET podem ser caraterizados como tipos por referência ou como tipos por valor. Classes, interfaces e *delegates* são considerados tipos por referência. Por sua vez, as estruturas (`struct`) e enumerações (`enum`) são representadas por tipos por valor. <br>
 >As variáveis de tipos por referência guardam, como o próprio nome indica, uma referência para o local onde está o valor. Por outras palavras, os espaços de armazenamento das variáveis deste tipo contêm os endereços onde podemos encontrar os respetivos valores. Se quisermos, podemos pensar nas variáveis deste tipo como sendo apontadores para outros locais de memória que contêm o valor referenciado. Por sua vez, as variáveis do tipo por valor guardam diretamente um valor desse tipo. <br>
->O tipo de um objeto não está diretamente relacionado com a passagem de valores através de parâmetros, sendo que o tipo de um parâmetro pode ser representado por um tipo por referência ou por um tipo por valor (e isto independentemente de os parâmetros serem passados por valor, por referência ou de saída).
+>O tipo de um objeto não está diretamente relacionado com a passagem de valores através de parâmetros, sendo que o tipo de um parâmetro pode ser representado por um tipo por referência ou por um tipo por valor (e isto independentemente de os parâmetros serem passados por valor, por referência ou de saída).<br>
 
 O C# também possibilita o uso dos chamados parâmetros de saída (normalmente designados na literatura por *out parameters*). Estes parâmetros são utilizados quando queremos delegar a inicialização de uma variável num método. Ao contrário do que acontece com os parâmetros por referência, os parâmetros deste tipo não necessitam de ser inicializados antes de serem passados a um método. Por outro lado, e à semelhança do que acontece com os parâmetros por referência, os parâmetros de saída também não possuem um espaço de armazenamento associado.
 
@@ -92,8 +91,8 @@ static class Informacao
 
 Como é possível verificar, o modificador `out` é usado simultaneamente na declaração e na invocação do método. A variável passada ao método não necessita de ser inicializada antes de ser passada ao método, sendo considerada inicializada apenas após o método ter sido concluído normalmente. Os parâmetros deste tipo têm sempre de ser inicializados no interior do método quando este é concluído com sucesso (isto é, quando estamos perante métodos que terminaram sem gerarem qualquer erro ou exceção).
 
-> **Tipos de parâmetros**
->Para além dos 3 tipos de parâmetros anteriores, a linguagem suporta ainda o uso de parâmetros do tipo *params*. Os parâmetros deste tipo permitem-nos passar um número indeterminado de parâmetros a um método aquando da sua invocação. Programaticamente, estas variáveis são representadas por *arrays*, que são anotados com o modificador `params`.
+> **Tipos de parâmetros**<br>
+>Para além dos 3 tipos de parâmetros anteriores, a linguagem suporta ainda o uso de parâmetros do tipo *params*. Os parâmetros deste tipo permitem-nos passar um número indeterminado de parâmetros a um método aquando da sua invocação. Programaticamente, estas variáveis são representadas por *arrays*, que são anotados com o modificador `params`.<br>
 
 Tipicamente, os parâmetros de saída são utilizados em métodos que necessitam de devolver mais do que um valor (como, per exemplo, o padrão seguido pelas bibliotecas da plataforma .NET nos métodos `Try...`, usados para efetuar conversões ou obter membros de dicionários). Nestes casos, o resultado devolvido pelo método indica se a operação foi, ou não, efetuada com sucesso, devendo o valor obtido ser retornado através de um parâmetro de saída. O método `DateTime.TryParse` é um destes métodos e o seu uso é ilustrado no excerto seguinte:
 
@@ -349,8 +348,8 @@ Qual será o tempo de vida da variável `p` no interior do corpo do ciclo `while
 
 Na prática, isto significa que cada execução do corpo do ciclo utiliza uma nova variável `p`, que é inicializada através da execução do método `int.TryParse`. Parece-nos que esta é, sem qualquer dúvida, a melhor opção, especialmente quando consideramos uma possível definição de funções através do uso de expressões lambda no interior de um ciclo. Nestes casos, a utilização de uma única variável acabaria por gerar alguns resultados inesperados devido à captura (*closure*) efetuada por esse tipo de expressões. Tendo em conta a experiência dos últimos anos, a introdução de uma nova variável em cada passo do ciclo é, sem qualquer dúvida, a melhor opção.
 
-> ***Closures*** e tempo de vida
->Os problemas associados ao uso de variáveis em closures introduzidas por expressões *lambda* acabaram por conduzir à introdução de uma breaking change no lançamento C# 5.0. Assim, essa versão da linguagem alterou o comportamento de variáveis declaradas em expressões `foreach`, fazendo com que cada execução do passo do bloco associado resultasse na introdução de uma nova variável. O leitor interessado pode obter mais informações sobre alguns dos problemas que conduziram a esta alteração neste [post](https://blogs.msdn.microsoft.com/ericlippert/2009/11/12/closing-over-the-loop-variable-considered-harmful/) escrito pelo Eric Lippert. 
+> ***Closures*** e tempo de vida<br>
+>Os problemas associados ao uso de variáveis em closures introduzidas por expressões *lambda* acabaram por conduzir à introdução de uma breaking change no lançamento C# 5.0. Assim, essa versão da linguagem alterou o comportamento de variáveis declaradas em expressões `foreach`, fazendo com que cada execução do passo do bloco associado resultasse na introdução de uma nova variável. O leitor interessado pode obter mais informações sobre alguns dos problemas que conduziram a esta alteração neste [post](https://blogs.msdn.microsoft.com/ericlippert/2009/11/12/closing-over-the-loop-variable-considered-harmful/) escrito pelo Eric Lippert. <br>
 
 
 ## Conclusão
@@ -361,14 +360,10 @@ No próximo capítulo, continuamos a apresentar as novas funcionalidades do C# 7
 
 ### Bibliografia
 
-["Out Variables"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/csharp-7#out-variables) 
-
-["C# Language Design Notes for Nov 30, 2016"](https://github.com/dotnet/csharplang/blob/master/meetings/2016/LDM-2016-11-30.md) 
-
-["Parameter passing in C#"](http://www.yoda.arachsys.com/csharp/parameters.html) 
-
-["C# 7, 'out var' and changing variable scope"](http://www.davidarno.org/2016/11/23/c-7-and-out-var-or-how-to-seriously-screw-up-a-language/)
-
+["Out Variables"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/csharp-7#out-variables) <br>
+["C# Language Design Notes for Nov 30, 2016"](https://github.com/dotnet/csharplang/blob/master/meetings/2016/LDM-2016-11-30.md) <br>
+["Parameter passing in C#"](http://www.yoda.arachsys.com/csharp/parameters.html) <br>
+["C# 7, 'out var' and changing variable scope"](http://www.davidarno.org/2016/11/23/c-7-and-out-var-or-how-to-seriously-screw-up-a-language/)<br>
 ["C# 7, 'out var' and changing variable scope, revisited"](http://www.davidarno.org/2017/01/30/c-7-out-var-and-changing-variable-scope-revisited/)
 
 

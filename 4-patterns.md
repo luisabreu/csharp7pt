@@ -256,8 +256,8 @@ public static class CalculadorArea
 
 A entrada `default` continua a ser opcional e as eventuais instruções associadas só serão executadas quando a avaliação dos testes relativos às entradas case anteriores produzirem o resultado `false`. A proibição de fall through mantêm-se, fazendo, assim, com que o grupo de instruções associadas a uma entrada case tenha de ser terminada com uma instrução `break` ou `return`.
 
->**Posicionamento da entrada *default***
->Tipicamente, a entrada default costuma ser apresentada após todas as entradas case. Note-se, contudo, que isso não é obrigatório. O leitor curioso pode verificar esta afirmação através da alteração do exemplo anterior (colocando, por exemplo, a entrada `default` antes de todas as entradas). Apesar disso, o código associado à entrada `default` só será executado quando nenhum dos testes associados às entradas case produzir o valor `true`. 
+>**Posicionamento da entrada *default***<br>
+>Tipicamente, a entrada default costuma ser apresentada após todas as entradas case. Note-se, contudo, que isso não é obrigatório. O leitor curioso pode verificar esta afirmação através da alteração do exemplo anterior (colocando, por exemplo, a entrada `default` antes de todas as entradas). Apesar disso, o código associado à entrada `default` só será executado quando nenhum dos testes associados às entradas case produzir o valor `true`. <br>
 
 
 ### Âmbito das variáveis introduzidas nas entradas *case*
@@ -430,7 +430,6 @@ No próximo capítulo, apresentamos as principais alterações introduzidas pela
 
 ### Bibliografia
 
-["Pattern matching"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/pattern-matching) 
-
-["C# 7: Pattern Matching"](http://blog.somewhatabstract.com/2017/01/23/c7-pattern-matching/) 
+["Pattern matching"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/pattern-matching) <br>
+["C# 7: Pattern Matching"](http://blog.somewhatabstract.com/2017/01/23/c7-pattern-matching/) <br>
 

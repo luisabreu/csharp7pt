@@ -30,7 +30,7 @@ Como é óbvio, existem várias restrições à aplicação deste qualificador a
 * as entradas de um array não podem ser aliases para variáveis.
 
 >**CLR (*Common Language Runtime*)**
->O CLR pode ser visto como um ambiente de execução para aplicações escritas no chamado código gerido (*managed code*). Para além de disponibilizar um ambiente de execução, o CLR fornece ainda outros serviços que contribuem para simplificar o desenvolvimento de aplicações. 
+>O CLR pode ser visto como um ambiente de execução para aplicações escritas no chamado código gerido (*managed code*). Para além de disponibilizar um ambiente de execução, o CLR fornece ainda outros serviços que contribuem para simplificar o desenvolvimento de aplicações. <br>
 
 A falta de suporte da linguagem à devolução de valores por referência obrigava-nos, quando necessário, a criarmos métodos que devolviam apontadores (considerado código não seguro - *unsafe code*) e a fixar memória através do uso dos chamados pinned objects. Esta fixação era necessária devido à gestão dinâmica de memória efetuada pelo *garbadge collector* (GC), já que, sem ela, não era possível garantir que o apontador devolvido a partir de um método referenciava uma posição de memória válida. Ao leitor interessado em aprender mais sobre o funcionamento interno CLR, recomendamos o livro [CLR via C#](https://www.amazon.co.uk/CLR-via-C-Jeffrey-Richter/dp/B00PVXRSMO). 
 
@@ -158,7 +158,7 @@ public static ref string DevolveString(string nome)
 ```
 
 >**Parâmetros de saída (*out*)**
->Apesar de o exemplo anterior se concentrar no uso de um parâmetro por referência, a regra também é aplicada quando estamos perante parâmetros de saída (isto é, parâmetros anotados com o termo `out`).
+>Apesar de o exemplo anterior se concentrar no uso de um parâmetro por referência, a regra também é aplicada quando estamos perante parâmetros de saída (isto é, parâmetros anotados com o termo `out`).<br>
 
 O segundo caso é "seguro para retornar" apenas se todas as referências obtidas a partir da invocação de outros métodos por referência forem consideradas como "seguras para retornar". Quando isto acontece, o compilador sabe que o valor retornado por referência não pode ser local ao método que o devolve. O exemplo seguinte tenta ilustrar este ponto:
 
@@ -270,16 +270,11 @@ No próximo capítulo, continuamos a apresentar as novas funcionalidades introdu
 
 ### Bibliografia
 
-["C# 7: Better Performance with Ref locals, and ref and Async returns"](http://blog.somewhatabstract.com/2017/02/06/c7-better-performance-with-ref-locals-and-ref-and-async-returns/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+SomewhatAbstract+%28Somewhat+Abstract%29)
-
-["Ref returns and ref locals"](https://blogs.msdn.microsoft.com/ericlippert/2011/06/23/ref-returns-and-ref-locals/) 
-
-["Tip 26 - C# 7 Ref Returns and Ref Locals"](https://www.devu.com/advanced-csharp-tips/tip-26-c-7-0-ref-returns-and-ref-locals/) 
-
-["C# 7: Ref Returns, Ref Locals, and how to use them"](https://www.danielcrabtree.com/blog/128/c-sharp-7-ref-returns-ref-locals-and-how-to-use-them) 
-
-["C# 7 Additions – ref Variables"](http://structuredsight.com/2016/08/31/c-7-additions-ref-variables/) 
-
+["C# 7: Better Performance with Ref locals, and ref and Async returns"](http://blog.somewhatabstract.com/2017/02/06/c7-better-performance-with-ref-locals-and-ref-and-async-returns/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+SomewhatAbstract+%28Somewhat+Abstract%29)<br>
+["Ref returns and ref locals"](https://blogs.msdn.microsoft.com/ericlippert/2011/06/23/ref-returns-and-ref-locals/) <br>
+["Tip 26 - C# 7 Ref Returns and Ref Locals"](https://www.devu.com/advanced-csharp-tips/tip-26-c-7-0-ref-returns-and-ref-locals/) <br>
+["C# 7: Ref Returns, Ref Locals, and how to use them"](https://www.danielcrabtree.com/blog/128/c-sharp-7-ref-returns-ref-locals-and-how-to-use-them) <br>
+["C# 7 Additions – ref Variables"](http://structuredsight.com/2016/08/31/c-7-additions-ref-variables/) <br>
 ["C# Design Meeting Sep 1 2015"](https://github.com/dotnet/csharplang/blob/0709623617764880198f972d66845e88a89fe149/meetings/2015/LDM-2015-09-01.md)
 
 

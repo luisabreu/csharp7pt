@@ -295,8 +295,8 @@ public class Test
 
 Até ao C# 2.0, a única forma de definirmos delegates passava pelo uso de métodos nomeados adicionados a classes. Com o lançamento da versão 2.0, a linguagem passou a permitir a definição de *delegates* através do uso de método anónimos. Com o lançamento da versão 3.0, a linguagem introduziu ainda o conceito de expressão *lambda*, que passou a ser a forma mais usual utilizada na definição deste tipo de métodos. Na maior parte das situações, a escolha da estratégia utilizada na definição do *delegate* (método anónimo vs expressão *lambda*) resume-se a uma questão de gosto pessoal.
 
->**Métodos anónimos vs expressões *lambda***
->O leitor interessado pode obter mais informações sobre o uso e caraterísticas de cada uma destas funcionalidades no [guia da linguagem C#](https://docs.microsoft.com/dotnet/articles/csharp/programming-guide/statements-expressions-operators/anonymous-methods). 
+>**Métodos anónimos vs expressões *lambda***<br>
+>O leitor interessado pode obter mais informações sobre o uso e caraterísticas de cada uma destas funcionalidades no [guia da linguagem C#](https://docs.microsoft.com/dotnet/articles/csharp/programming-guide/statements-expressions-operators/anonymous-methods). <br>
 
 Antes do lançamento do C# 7.0, este tipo de expressões (métodos anónimos e expressões *lambda*) permitiam-nos criar métodos que, à primeira vista, podem parecer muito semelhantes às funções locais apresentadas neste capítulo. Contudo, e como referimos no início deste capítulo, existem algumas diferenças entre as funções locais e os métodos anónimos usados para criar delegates. A principal resume-se ao facto de a invocação de um método anónimo ser sempre efetuada através de um *delegate*. A partir daqui, é fácil concluirmos que a performance associada ao uso de funções locais tende a ser melhor (especialmente quando estamos perante cenários de recursão).
 
@@ -313,6 +313,5 @@ No próximo capítulo, continuamos a analisar as novas funcionalidades introduzi
 
 ### Bibliografia
 
-["Local functions"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/whats-new/csharp-7#local-functions) 
-
+["Local functions"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/whats-new/csharp-7#local-functions) <br>
 ["Thoughts on C# 7 Local Functions"](https://asizikov.github.io/2016/04/15/thoughts-on-local-functions/) 

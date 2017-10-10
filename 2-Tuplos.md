@@ -9,8 +9,8 @@ A natureza fortemente tipificada da linguagem C# introduz várias vantagens na e
 
 Na maior parte das vezes, os programadores optavam pela introdução de um novo tipo em detrimento do uso de parâmetros de saída. Esta opção justifica-se, essencialmente, por duas razões. Em primeiro lugar, porque em muitos dos métodos onde temos esta necessidade, os valores devolvidos acabam por formar uma entidade coerente (nestes casos, a introdução de um novo tipo para agrupar os vários valores devolvidos acaba por ser adequada).
 
-> **O padrão *TryParse***
->A plataforma .NET introduz, desde a versão 2.0, um conjunto de métodos que permitem converter um valor de um tipo noutro. Estes métodos são normalmente designados por `TryParse` e caraterizam-se pelo facto de devolverem dois valores. O primeiro é representado por um `bool` e é devolvido através do tipo de retorno do método. Este valor é utilizado para indicar o resultado final da conversão (`true` indica uma conversão efetuada com sucesso). Por sua vez, o segundo é devolvido através de um parâmetro de saída e permite-nos recuperar o valor obtido a partir da conversão (quando esta é efetuada com sucesso). Neste caso, a criação de um novo tipo para representar o valor devolvido por este método faz menos sentido do que o uso de um parâmetro de saída, já que a combinação dos valores não resulta na criação de uma entidade coerente. 
+> **O padrão *TryParse***<br>
+>A plataforma .NET introduz, desde a versão 2.0, um conjunto de métodos que permitem converter um valor de um tipo noutro. Estes métodos são normalmente designados por `TryParse` e caraterizam-se pelo facto de devolverem dois valores. O primeiro é representado por um `bool` e é devolvido através do tipo de retorno do método. Este valor é utilizado para indicar o resultado final da conversão (`true` indica uma conversão efetuada com sucesso). Por sua vez, o segundo é devolvido através de um parâmetro de saída e permite-nos recuperar o valor obtido a partir da conversão (quando esta é efetuada com sucesso). Neste caso, a criação de um novo tipo para representar o valor devolvido por este método faz menos sentido do que o uso de um parâmetro de saída, já que a combinação dos valores não resulta na criação de uma entidade coerente. <br>
 
 Para além da questão levantada no parágrafo anterior, o uso de parâmetros de saída não é possível em alguns casos. Por exemplo, os métodos assíncronos (métodos que recorrem aos termos `async`/`await` para simplificar a escrita de código que utilizam tarefas assíncronas) não podem definir parâmetros deste tipo. No exemplo seguinte, estamos perante um método que necessita devolver dois valores. Neste caso, optámos por recorrer a um novo tipo para agrupar ambos os valores devolvidos pelo método:
 
@@ -64,9 +64,9 @@ O uso de um tuplo (definido através da sintaxe literal) no excerto anterior per
 
 Apesar de já termos apresentado um exemplo que ilustra o uso de um tuplo, a verdade é que ainda não apresentamos uma definição oficial para este tipo de elemento. De uma forma resumida, podemos ver um tuplo como uma lista ordenada, imutável, heterógena, mas fortemente tipificada de valores, valores esses podem ser recuperados através de nomes personalizados definidos pelo programador.
 
-> **Utilização de tupos em .NET**
->A utilização deste tipo de elementos pressupõe o uso da Framework .NET versão 4.7 ou a instalação do pacote *Nuget* `System.ValueTuple`. Para instalar o pacote *Nuget* `System.ValueTuple`, podemos executar o comando seguinte a partir de uma consola *Nuget* no *Visual Studio*:
-> `install-package System.ValueTuple`
+> **Utilização de tupos em .NET**<br>
+>A utilização deste tipo de elementos pressupõe o uso da Framework .NET versão 4.7 ou a instalação do pacote *Nuget* `System.ValueTuple`. Para instalar o pacote *Nuget* `System.ValueTuple`, podemos executar o comando seguinte a partir de uma consola *Nuget* no *Visual Studio*:<br>
+> `install-package System.ValueTuple`<br>
 
 Como é possível verificar através do exemplo anterior, a simplicidade associada à criação deste tipo de elementos é um dos pontos fortes associados ao seu uso. Para além disso, a possibilidade de definição de nomes personalizados para identificar os valores agrupados num tuplo (no exemplo anterior, os valores do tuplo são identificados pelos nomes contador e soma) é outro dos aspetos positivos associados ao uso deste tipo de elementos.
 
@@ -362,16 +362,10 @@ No próximo capítulo, continuamos a nossa análise das novidades introduzidas p
 
 ### Bibliografia
 
-["C# Design Notes for Apr 6, 2016"](https://github.com/dotnet/csharplang/blob/master/meetings/2016/LDM-2016-04-06.md) 
-
-["Tupples"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/csharp-7#tuples) 
-
-["Why do C# 7 Value Tuples implement the Equals method but not the double equals operator"](http://stackoverflow.com/questions/42170040/why-do-c-sharp-7-valuetuples-implement-the-equals-method-but-not-the-double-equa) 
-
-["Support for == and != on ValueTuple"](https://github.com/dotnet/roslyn/issues/13155) 
-
-["Quickstart guide for tuples"(]https://github.com/dotnet/roslyn/blob/master/docs/features/tuples.md) 
-
-["Tuples in C# 7"](https://www.thomaslevesque.com/2016/07/25/tuples-in-c-7/) 
-
+["C# Design Notes for Apr 6, 2016"](https://github.com/dotnet/csharplang/blob/master/meetings/2016/LDM-2016-04-06.md) <br>
+["Tupples"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/csharp-7#tuples) <br>
+["Why do C# 7 Value Tuples implement the Equals method but not the double equals operator"](http://stackoverflow.com/questions/42170040/why-do-c-sharp-7-valuetuples-implement-the-equals-method-but-not-the-double-equa) <br>
+["Support for == and != on ValueTuple"](https://github.com/dotnet/roslyn/issues/13155) <br>
+["Quickstart guide for tuples"(]https://github.com/dotnet/roslyn/blob/master/docs/features/tuples.md) <br>
+["Tuples in C# 7"](https://www.thomaslevesque.com/2016/07/25/tuples-in-c-7/) <br>
 ["Tackling Tuples: Understanding the new C# 7 Value Type"](http://our.componentone.com/2017/01/30/tackling-tuples-understanding-the-new-c-7-value-type/) 

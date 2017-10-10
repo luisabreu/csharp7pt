@@ -108,8 +108,8 @@ Internamente, a máquina de estados vai transitando entre os vários estados int
 
 Quando a máquina de estados atinge o estado associado à expressão `await`, o método `GetAwaiter` do tipo de retorno da tarefa é invocado. Se este tipo implementar a interface `ICriticalNotifyCompletion` e a propriedade `IsCompleted` devolver o valor `false`, então o método `AwaitUnsafeOnCompleted` do construtor de método assíncronos acabará por ser invocado. Este método é responsável por executar o método `OnComplete` disponibilizado pelo tipo de retorno da tarefa, passando-lhe uma `Action` que, por sua vez, invoca o método da máquina de estados. O comportamento descrito neste parágrafo é semelhante quando o tipo de retorno do método assíncrono implementa a interface `INotifyCompletion`, mas, neste caso, o método executado é o método `AwaitOnCompleted` disponibilizado pelo construtor de método assíncronos.
 
->***Overload* de métodos**
->A introdução novos tipos de retorno de métodos assíncronos obrigou à alteração do comportamento de resolução quando estamos perante overloads de métodos. Assim, a resolução de *overloads* foi alterada para passar a ter em conta os novos tipos deste género. Uma expressão lambda sem tipo de retorno corresponde diretamente a um candidato não genérico de um tipo de retorno de um método assíncrono. Por sua vez, uma expressão *lambda* com um tipo de retorno `T` corresponde diretamente a um candidato que possui um parâmetro genérico de um tipo de retorno de método assíncrono. Se a expressão *lambda* usada não corresponder a nenhum dos candidatos anteriores de um tipo de retorno de método assíncrono, e se existir uma conversão explícita do tipo utilizado num candidato para o outro, então esse candidato é considerado vencedor. Caso contrário, procede-se à evolução recursiva dos tipos `A` e `B` a partir de `Task<A>` e `Task<B>` para obtermos a melhor correspondência. Finalmente, se uma expressão *lambda* não for diretamente convertível num dos candidatos de um tipo *task* mas se um dos candidatos for mais especializado que o outro, então o mais especializado ganha. 
+>***Overload* de métodos**<br>
+>A introdução novos tipos de retorno de métodos assíncronos obrigou à alteração do comportamento de resolução quando estamos perante overloads de métodos. Assim, a resolução de *overloads* foi alterada para passar a ter em conta os novos tipos deste género. Uma expressão lambda sem tipo de retorno corresponde diretamente a um candidato não genérico de um tipo de retorno de um método assíncrono. Por sua vez, uma expressão *lambda* com um tipo de retorno `T` corresponde diretamente a um candidato que possui um parâmetro genérico de um tipo de retorno de método assíncrono. Se a expressão *lambda* usada não corresponder a nenhum dos candidatos anteriores de um tipo de retorno de método assíncrono, e se existir uma conversão explícita do tipo utilizado num candidato para o outro, então esse candidato é considerado vencedor. Caso contrário, procede-se à evolução recursiva dos tipos `A` e `B` a partir de `Task<A>` e `Task<B>` para obtermos a melhor correspondência. Finalmente, se uma expressão *lambda* não for diretamente convertível num dos candidatos de um tipo *task* mas se um dos candidatos for mais especializado que o outro, então o mais especializado ganha. <br>
 
 
 ## O tipo *ValueTask<T>*
@@ -151,11 +151,8 @@ No próximo capítulo, analisamos as novidades introduzidas pela linguagem no qu
 
 ### Bibliografia
 
-["Generalized async return types"](http://blog.somewhatabstract.com/2017/02/06/c7-better-performance-with-ref-locals-and-ref-and-async-returns/) 
-
-["Understanding C# async/await compilation"](https://weblogs.asp.net/dixin/understanding-c-sharp-async-await-1-compilation) 
-
-["Return Any (Task-Like) Type From An Async Method"](http://blog.i3arnon.com/2016/07/25/arbitrary-async-returns/) 
-
+["Generalized async return types"](http://blog.somewhatabstract.com/2017/02/06/c7-better-performance-with-ref-locals-and-ref-and-async-returns/) <br>
+["Understanding C# async/await compilation"](https://weblogs.asp.net/dixin/understanding-c-sharp-async-await-1-compilation) <br>
+["Return Any (Task-Like) Type From An Async Method"](http://blog.i3arnon.com/2016/07/25/arbitrary-async-returns/) <br>
 ["Async Task Types in C#"](https://github.com/dotnet/roslyn/blob/master/docs/features/task-types.md) 
 

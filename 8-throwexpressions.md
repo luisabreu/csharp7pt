@@ -105,6 +105,5 @@ No próximo capítulo, encerramos o livro com a apresentação das novas funcion
 
 ### Bibliografia
 
-["Throw expressions"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/csharp-7#throw-expressions) 
-
+["Throw expressions"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/csharp-7#throw-expressions) <br>
 ["Throw expressions"](https://github.com/dotnet/csharplang/blob/master/proposals/csharp-7.0/throw-expression.md)

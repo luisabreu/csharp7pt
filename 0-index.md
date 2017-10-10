@@ -31,8 +31,8 @@ var a = 10;
 
 Por sua vez, as notas ou observações importantes poderão ser encontradas no interior de uma secção semelhante à seguinte:
 
-> **Nota importante**
-> Esta é uma nota importante.
+> **Nota importante**<br>
+> Esta é uma nota importante.<br>
 
 
 ## Organização do livro
