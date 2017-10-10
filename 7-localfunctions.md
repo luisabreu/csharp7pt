@@ -314,4 +314,5 @@ No próximo capítulo, continuamos a analisar as novas funcionalidades introduzi
 ### Bibliografia
 
 ["Local functions"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/whats-new/csharp-7#local-functions) 
+
 ["Thoughts on C# 7 Local Functions"](https://asizikov.github.io/2016/04/15/thoughts-on-local-functions/) 

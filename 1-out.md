@@ -362,8 +362,13 @@ No próximo capítulo, continuamos a apresentar as novas funcionalidades do C# 7
 ### Bibliografia
 
 ["Out Variables"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/csharp-7#out-variables) 
+
 ["C# Language Design Notes for Nov 30, 2016"](https://github.com/dotnet/csharplang/blob/master/meetings/2016/LDM-2016-11-30.md) 
+
 ["Parameter passing in C#"](http://www.yoda.arachsys.com/csharp/parameters.html) 
+
 ["C# 7, 'out var' and changing variable scope"](http://www.davidarno.org/2016/11/23/c-7-and-out-var-or-how-to-seriously-screw-up-a-language/)
+
 ["C# 7, 'out var' and changing variable scope, revisited"](http://www.davidarno.org/2017/01/30/c-7-out-var-and-changing-variable-scope-revisited/)
+
 

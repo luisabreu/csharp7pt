@@ -431,6 +431,6 @@ No próximo capítulo, apresentamos as principais alterações introduzidas pela
 ### Bibliografia
 
 ["Pattern matching"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/pattern-matching) 
-["C# 7: Pattern Matching"](http://blog.somewhatabstract.com/2017/01/23/c7-pattern-matching/) 
 
+["C# 7: Pattern Matching"](http://blog.somewhatabstract.com/2017/01/23/c7-pattern-matching/) 
 
