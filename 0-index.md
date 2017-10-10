@@ -45,7 +45,7 @@ Este livro agrupa as várias novidades introduzidas pela nova especificação em
 O C# sempre suportou o conceito de parâmetro de saída. Tipicamente, estes parâmetros são utilizados por métodos que necessitam de devolver mais do que um valor. Como veremos neste capítulo, o trabalho necessário à utilização deste tipo de parâmetros é reduzido através do suporte à declaração de variáveis na lista de parâmetros de um método.
 
 
-### [Capítulo 2](2-tuplos.md): Tuploes (*Tuples*)
+### [Capítulo 2](2-tuplos.md): Tuplos (*Tuples*)
 
 Outra das novidades introduzidas pela versão 7 da linguagem são os tuplos (também conhecidos por *tuples*). Uma vez mais, estamos perante uma nova funcionalidade que tenta simplificar e reduzir o trabalho do programador em alguns cenários concretos. Com os tuplos, passamos a poder devolver mais do que um valor a partir de um método sem que isso implique o uso de parâmetros de saída ou a definição explícita de novos tipos. O Capítulo 2 analisa as principais caraterísticas associadas ao uso deste tipo de elementos.
 
