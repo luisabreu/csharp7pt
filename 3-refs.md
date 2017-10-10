@@ -275,8 +275,6 @@ No próximo capítulo, continuamos a apresentar as novas funcionalidades introdu
 ["Tip 26 - C# 7 Ref Returns and Ref Locals"](https://www.devu.com/advanced-csharp-tips/tip-26-c-7-0-ref-returns-and-ref-locals/) <br>
 ["C# 7: Ref Returns, Ref Locals, and how to use them"](https://www.danielcrabtree.com/blog/128/c-sharp-7-ref-returns-ref-locals-and-how-to-use-them) <br>
 ["C# 7 Additions – ref Variables"](http://structuredsight.com/2016/08/31/c-7-additions-ref-variables/) <br>
-["C# Design Meeting Sep 1 2015"](https://github.com/dotnet/csharplang/blob/0709623617764880198f972d66845e88a89fe149/meetings/2015/LDM-2015-09-01.md)
+["C# Design Meeting Sep 1 2015"](https://github.com/dotnet/csharplang/blob/0709623617764880198f972d66845e88a89fe149/meetings/2015/LDM-2015-09-01.md)<br>
 
-
-
-
+[Anterior](2-tuplos.md) [Índice](index.md) [Próximo](4-patterns.md)

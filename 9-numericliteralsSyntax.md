@@ -129,4 +129,6 @@ Parece-nos, contudo, que se somarmos todas novidades introduzidas por esta vers√
 ### Bibliografia
 
 ["C# 7: Binary Literals and Numeric Literal Digit Separators"](http://blog.somewhatabstract.com/2017/01/02/c7-binary-literals-and-numeric-literal-digit-separators/) <br>
-["What's new in C# 7"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/csharp-7#numeric-literal-syntax-improvements) 
+["What's new in C# 7"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/csharp-7#numeric-literal-syntax-improvements) <br>
+
+[Anterior](8-throwexpressions.md) [√çndice](index.md)

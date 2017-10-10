@@ -433,3 +433,4 @@ No próximo capítulo, apresentamos as principais alterações introduzidas pela
 ["Pattern matching"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/pattern-matching) <br>
 ["C# 7: Pattern Matching"](http://blog.somewhatabstract.com/2017/01/23/c7-pattern-matching/) <br>
 
+[Anterior](3-refs.md) [Índice](index.md) [Próximo](5-asyncreturns.md)

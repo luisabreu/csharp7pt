@@ -154,5 +154,6 @@ No próximo capítulo, analisamos as novidades introduzidas pela linguagem no qu
 ["Generalized async return types"](http://blog.somewhatabstract.com/2017/02/06/c7-better-performance-with-ref-locals-and-ref-and-async-returns/) <br>
 ["Understanding C# async/await compilation"](https://weblogs.asp.net/dixin/understanding-c-sharp-async-await-1-compilation) <br>
 ["Return Any (Task-Like) Type From An Async Method"](http://blog.i3arnon.com/2016/07/25/arbitrary-async-returns/) <br>
-["Async Task Types in C#"](https://github.com/dotnet/roslyn/blob/master/docs/features/task-types.md) 
+["Async Task Types in C#"](https://github.com/dotnet/roslyn/blob/master/docs/features/task-types.md) <br>
 
+[Anterior](4-patterns.md) [Índice](index.md) [Próximo](6-expressionbodied.md)

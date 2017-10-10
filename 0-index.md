@@ -88,3 +88,5 @@ Com o C# 7, passamos a poder representar números inteiros em formato binário. 
 ## Suporte
 
 Este livro foi escrito com base na versão final da linguagem C# 7. Se, por acaso, o leitor encontrar informação que lhe pareça incorreta, ou se tiver sugestões em relação ao conteúdo de alguma secção do livro, então, não hesite e envie um email com as suas questões para labreu@gmail.com ou paulo@paulomorgado.info.
+
+[Índice](index.md)

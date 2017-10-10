@@ -368,4 +368,6 @@ No próximo capítulo, continuamos a nossa análise das novidades introduzidas p
 ["Support for == and != on ValueTuple"](https://github.com/dotnet/roslyn/issues/13155) <br>
 ["Quickstart guide for tuples"(]https://github.com/dotnet/roslyn/blob/master/docs/features/tuples.md) <br>
 ["Tuples in C# 7"](https://www.thomaslevesque.com/2016/07/25/tuples-in-c-7/) <br>
-["Tackling Tuples: Understanding the new C# 7 Value Type"](http://our.componentone.com/2017/01/30/tackling-tuples-understanding-the-new-c-7-value-type/) 
+["Tackling Tuples: Understanding the new C# 7 Value Type"](http://our.componentone.com/2017/01/30/tackling-tuples-understanding-the-new-c-7-value-type/) <br>
+
+[Anterior](1-out.md) [Índice](index.md) [Próximo](3-refs.md)

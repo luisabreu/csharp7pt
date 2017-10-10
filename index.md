@@ -9,7 +9,7 @@ Sugestões e correções são sempre bem vindas!
 
 [I - Dedicatória](I-dedicatoria.md) <br>
 [II - Agradecimentos](II-agradecimentos.md)<br>
-[Índice](0-index.md)<br>
+[Introdução](0-index.md)<br>
 [Declaração de variáveis na lista de parâmetros de saída](1-out.md)<br>
 [Tuplos](2-tuplos.md)<br>
 [Devolução de valores por referência](3-refs.md)<br>

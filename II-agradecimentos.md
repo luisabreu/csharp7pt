@@ -14,3 +14,5 @@ Em primeiro lugar, quero agradecer à minha esposa, **Eugénia**, e ao meu filho
 Quero ainda aproveitar esta oportunidade para agradecer ao meu amigo **Luís Abreu**, que me desafiou novamente a participar na criação deste livro e mais um agradecimento ao meu filho **Carlos** pela revisão do mesmo.
 
 ***Paulo Morgado***
+
+[Anterior](I-dedicatoria.md) [Índice](index.md) [Próximo](0-index.md)

@@ -314,4 +314,6 @@ No próximo capítulo, continuamos a analisar as novas funcionalidades introduzi
 ### Bibliografia
 
 ["Local functions"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/whats-new/csharp-7#local-functions) <br>
-["Thoughts on C# 7 Local Functions"](https://asizikov.github.io/2016/04/15/thoughts-on-local-functions/) 
+["Thoughts on C# 7 Local Functions"](https://asizikov.github.io/2016/04/15/thoughts-on-local-functions/) <br>
+
+[Anterior](6-expressionbodied.md) [Índice](index.md) [Próximo](8-throwexpressions.md)
