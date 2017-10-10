@@ -21,9 +21,9 @@ Sugestões e correções são sempre bem vindas!
 
 [Expressões de correspondência de tipos através de padrões](4-patterns.md)
 
-[Tipos de retorno de métodos assíncronos](5 - asyncreturns.md)
+[Tipos de retorno de métodos assíncronos](5-asyncreturns.md)
 
-[Membros com corpos definidos por expressões](6 - expressionbodied.md)
+[Membros com corpos definidos por expressões](6-expressionbodied.md)
 
 [Funções locais](7-localfunctions.md)
 
