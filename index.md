@@ -19,3 +19,5 @@ Sugestões e correções são sempre bem vindas!
 [Funções locais](7-localfunctions.md)<br>
 [Expressões *throw*](8-throwexpressions.md)<br>
 [Sintaxe dos literais numéricos](9-numericliteralssyntax.md)<br>
+
+[Próximo](I-dedicatoria.md)
