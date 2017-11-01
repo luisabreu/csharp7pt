@@ -142,6 +142,68 @@ No exemplo anterior, `LoadCache` é um método assíncrono privado, que é respo
 Antes da introdução dos novos tipos de retorno de métodos estáticos, teríamos de recorrer sempre ao tipo `Task<int>` para representar o valor devolvido no cenário anterior. Nesses casos, a representação do valor calculado sincronamente obrigava-nos sempre a criar uma nova instância do tipo `Task<int>` (tipicamente obtida a partir da execução do método `Task.FromResult`). A devolução de uma instância deste tipo implicaria sempre uma eventual limpeza de memória (* garbadge collection*) que fica a cargo do GC. Com a introdução das novas regras e do novo tipo `ValueTask<T>`, podemos evitar este uso desnecessário da * heap* (e obter alguns ganhos a nível da performance da aplicação).
 
 
+## Métodos *Main* assícronos (*async Main*)
+
+O método `Main` é o ponto de entrada de qualquer aplicação escrita em C# (recorde-se que livrarias e serviços *Windows* não definem pontos de entrada). Como é do conhecimento geral, uma aplicação apenas pode ter um ponto de entrada, sendo que este método estático pode ser definido no interior de uma classe (`class`) ou estrutura (`struct`). Ao contrário do que muitas pessoas pensam, este método não necessita de ser público.
+
+Até ao lançamento da versão 7.1, o tipo de retorno do método que desempenha o papel de ponto de entrada estava limitado aos tipos `void` e `int`. Com o lançamento da versão 7.1, esta restrição é alterada e passamos a poder ter métodos `Main` que devolvem elementos do tipo `Task` ou `Task<int>`. Nestes casos (e apenas nestes!), podemos aplicar o qualificador `async` ao método. Portanto, com o C# 7.1 passamos a poder recorrer ao termo `await` no interior do método `Main`.
+
+Na prática, isto significa que o código semelhante ao seguinte:
+
+```cs
+static int Main()
+{
+    return DoAsyncWork().GetAwaiter().GetResult();
+}
+```
+
+Pode passar a ser escrito com recurso a métodos assíncronos:
+
+```cs
+static async Task<int> Main()
+{
+    return await DoAsyncWork();
+}
+```
+
+Ao encontrar uma assinatura deste tipo, o compilador acaba por criar um novo método `Main` que funciona como ponto de entrada da aplicação. A partir do interior deste novo método, o compilador injeta código que se limita a chamar o método assíncrono `Main` definido pelo programa que está a ser compilado (por outras palavras, o compilador gera código muito semelhante ao utilizado quando necessitávamos de chamar um método assíncrono a partir do interior de um método `Main`).
+
+A devolução do código de saída do programa (representada através de um valor inteiro) é opcional, pelo que pode ser omitida. Nestes casos, e se estivermos perante a execução de métodos assíncronos, podemos continuar a utilizar o termo `await` desde que o método `Main` devolva um objeto do tipo `Task`:
+
+```cs
+static async Task Main()
+{
+    await SomeAsyncMethod();
+}
+```
+
+O método `Main` não permite o uso do termo `async` quando utilizamos `void` como tipo de retorno. Isto deve-se ao facto de esse padrão (`async void`) sinalizar cenários do tipo *fire-and-forget*, tipicamente utilizados apenas na definição de métodos que são usados como *event handlers*. Os métodos assíncronos `async void` possuem comportamentos ligeiramente diferentes dos restantes métodos assíncronos (isto é, dos métodos que devolvem `async Task` ou `async Task<T>`). Normalmente, as exceçoes geradas durante a execução assíncrona de um método assíncrono são adicionadas ao objeto `Task`. Quando estamos perante um método do tipo `async void`, não existe nenhum objeto do tipo `Task`, pelo que a exceção será propagada automaticamente pelo contexto de sincronização ativo (`SynchronizationContext`) aquando do início do método. O excerto seguinte ilustra os problemas inerentes a este tipo de métodos:
+
+```cs
+private async void GeraExcecaoAsync()
+{
+  throw new InvalidOperationException();
+}
+
+public void AsyncVoidExceptions_NaoSaoApanhadas()
+{
+  try
+  {
+    GeraExcecaoAsync();
+  }
+  catch (Exception)
+  {
+    // Excecao nao e apanhada aqui!
+    throw;
+  }
+}
+```
+
+Nestes casos, a exceção só pode ser apanhada através de métodos que tratam eventos globais, como, por exemplo, `AppDomain.UnhandledException` (ou eventos equivalentes existentes nas plataformas *Windows* ou ASP.NET).
+
+Os métodos `async void` também não são dados à composição. Quando estamos perante métodos assíncronos que retornam objetos do tipo `Task` ou `Task<T>`, facilmente conseguimos combiná-los através do uso dos métodos `Task.WhenAny` ou `Task.WaitAll`. Isto deixa de ser possível quando estamos perante métodos `async void`, uma vez que eles não sinalizam o seu final ao código que os invoca. Nestes casos, uma solução possível passa pela criação de um contexto de sincronização personalizado (isto é, por criarmos uma nova classe derivada de `SynchronizationContext`). Infelizmente, esta é uma solução demasiado complexa para a maior parte dos cenários do dia-a-dia.
+
+
 ## Conclusão
 
 O C# 7.0 introduz algumas novidades interessantes relacionadas com a criação e utilização de métodos assíncronos. Como vimos neste capítulo, foram levantadas algumas restrições e os métodos deste tipo já podem devolver qualquer tipo que seja considerado como *task-like type*. 
