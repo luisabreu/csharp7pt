@@ -134,6 +134,27 @@ var tuplo1 = (n: "Luis", m: "Funchal");
 Neste caso, e como veremos mais à frente, estamos perante uma inicialização de um tuplo a partir de um outro tuplo compatível. Ambos agrupam o mesmo número de valores e cada um dos valores do primeiro tuplo possui exatamente o mesmo tipo do valor que ocupa a mesma posição no segundo (uma "conversão" semelhante à anterior, onde os valores são do mesmo tipo, mas são identificados através de nomes personalizados diferentes é designada por conversão por identidade - *identity conversion*).
 
 
+## Inicialização a partir de variáveis
+
+Como seria de esperar, os tuplos também podem ser inicializados a partir de valores guardados em variáveis. O excerto seguinte ilustra este cenário:
+
+```cs
+var nome = "Luis";
+var morada = "Funchal";
+var dados = (nome: nome, morada: morada);
+```
+
+No exemplo anterior, criamos um novo tuplo cujos dados podem ser acedidos através dos nomes `nome` e `morada`. A partir do C# 7.1, e uma vez que as variáveis utilizadas na inicialização  possuem os mesmos nomes que nos permitem aceder aos valores guardados pelo tuplo, então poderíamos ter recorrido a uma sintaxe simplificada para inicializar o tuplo `dados`, conforme ilustrado em seguida:
+
+```cs
+var nome = "Luis";
+var morada = "Funchal";
+var dados = (nome, morada);
+```
+
+Nestes casos, o compilador é responsável por inferir os nomes devem ser utilizados no acesso aos valores guardados no tuplo (a partir dos nomes das variáveis). Por outras palavras, a recuperação dos valores mantidos no tuplo continua a ser feita através dos nomes `nome` e `morada`.
+
+
 ## Desconstrução de tuplos
 
 A linguagem também permite efetuar a desconstrução de um tuplo através do uso das chamadas expressões de desconstrução. As expressões deste tipo permitem-nos inicializar um conjunto de variáveis a partir dos valores agrupados por um tuplo. Analisemos o exemplo seguinte:
