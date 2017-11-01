@@ -85,6 +85,39 @@ Até ao lançamento do C# 7, o termo reservado `throw` estava reservado apenas p
 Com o C# 7, passamos a poder representar números inteiros em formato binário. Para além disso, a legibilidade do código é melhorada através da introdução de um carácter que desempenha o papel de separador. Neste capítulo, apresentamos alguns exemplos que justificam a introdução desta funcionalidade e que mostram como a nova sintaxe pode contribuir para melhorar a legibilidade do código que escrevemos.
 
 
+## Nota rápida sobre a versão 7.1 da linguagem
+
+O lançamento da versão 7.1 da linguagem C# constitui um marco importante da linguagem. A partir desta altura, passamos a ter a possibilidade de configurar o compilador para utilizar apenas as funcionalidades introduzidas por uma determinada versão da linguagem através do uso do chamado meacnismo de seleção da linguagem (*language version selection*). A introdução deste mecanismo de configuração permite-nos evoluir a versão da linguagem utilizada, sem que isso implique instalação de novas ferramentas de desenvolvimento.
+
+Na prática, a utilização da versão 7.1 da linguagem C# é suportada no *Visual Studio 2017* (versão 15.3 ou superior) ou em projetos que utilizam o SDK da plataforma .NET 4.7.1 ou da plataforma .NET Core 2.0. Apesar disso, as novas funcionalidades introduzidas pela versão 7.1 estão desligadas por predefinição, pelo que a sua utilização força-nos a efetuar algumas configurações extra. Assim, os leitores que preferem utilizar o *Visual Studio*, terão de começar por aceder às propriedades do Projeto, onde, em seguida, deverão clicar sobre o botão *Advanced* existente no tabulador *Build*. A partir dessa altura, poderão escolher a versão da linguagem C# que desejam utilizar.
+
+Alternativamente,  também podemos obter os mesmos resultados através  da edição direta do ficheiro de projeto (ficheiro de extensão *csproj*). Para isso, torna-se necessário atualizar o valor do elemento `LangVersion` existente no interior do elemento `PropertyGroup`:
+
+```xml
+<PropertyGroup>
+    <LangVersion>latest</LangVersion>
+</PropertyGroup>
+```` 
+
+Os leitores que pretendam recorrer a esta estratégia para projetos criados através do *Visual Studio* devem ainda ter em atenção que este IDE cria nós diferentes para as versões de *build* *Debug* e *Release* que são geradas por predefinição. Assim, torna-se necessário proceder à edição de ambos os nós se pretendermos utilizar as funcionalidades mais recentes da linguagem, conforme ilustrado em seguida:
+
+```xml
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  <LangVersion>latest</LangVersion>
+</PropertyGroup>
+
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <LangVersion>latest</LangVersion>
+</PropertyGroup>
+```
+
+Nos exemplos anteriores, a utilização do termo `latest` permite-nos utilizar as funcionalidades introduzidas pela última versão *minor* da linguagem. Nesta altura, isso significa que o projeto pode utilizar todas as novidades introduzidas pela versão 7.1 da linguagem. Se, no futuro, instalarmos uma nvoa versão da linguagem, então o uso deste termo garante a utilização dessas novas funcionalidades sem que tenhamos de efetuar qualquer alteração à configuração do projeto.
+
+Para além do valor `latest`, podemos ainda recorrer ao valor especial `default`. A utilização deste valor faz com que apenas sejam utilizadas as funcionalidades introduzidas pela última versão *major* da linguagem. Portanto, se tivessemos utilizado este valor, nesta altura apenas poderíamos utilizar as funcionalidades introduzidas pela versão 7.0 da linguagem.
+
+Outra das novidades relacionadas com o lançamento da versão 7.1 prende-se com a introdução de duas novas *flags* que permitem a geração dos chamados *reference-only assemblies*: [*/refout*](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/refout-compiler-option) e [*/refonly*](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/refonly-compiler-option). Uma vez que estas funcionalidades não estão diretamente relacionadas com a linguagem, mas sim com a forma como as *assemblies* são criadas e construídas em .NET, então não iremos aprofundar esse tópico neste livro.
+
+
 ## Suporte
 
 Este livro foi escrito com base na versão final da linguagem C# 7. Se, por acaso, o leitor encontrar informação que lhe pareça incorreta, ou se tiver sugestões em relação ao conteúdo de alguma secção do livro, então, não hesite e envie um email com as suas questões para labreu@gmail.com ou paulo@paulomorgado.info.
