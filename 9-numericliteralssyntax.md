@@ -1,4 +1,4 @@
-# Sintaxe dos literais numéricos
+# Sintaxe dos literais numéricos e utilização de literais *default*
 
 A versão 7.0 da linguagem introduz algumas novidades na sintaxe utilizada na representação de valores literais numéricos. Assim, a partir desta altura, passamos a poder representar valores inteiros em formato binários e a poder utilizar um novo carácter como separador de dígitos. Estas alterações na representação de literais numéricos procuram reduzir os erros associados à leitura deste tipo de valores, especialmente quando necessitamos de trabalhar com valores binários ou com enumerações do tipo *flag*.
 
@@ -118,6 +118,23 @@ Nesta altura, resta-nos apenas referir que este separador não está limitado à
 public const long contas = 100_000_500_000;
 public const double Avogrado = 6.022_140_857_747_474e23
 ```
+
+## Utilização de literais *default*
+
+Os literais *default* podem ser vistos como uma simplificação das expressões *default value*. As expressões *default value* são utilizadas para inicializar variáveis com o valor predefinido de um determinado tipo. No exemplo seguinte, recorremos a uma expressão deste tipo para inicializar a variável `i`:
+
+```cs
+int i = default(int); //inicializado a 0
+```
+
+A partir do C# 7.1, podemos obter o mesmo resultado através do uso de um literal *default*. Assim, o excerto seguinte produz exatamente o mesmo resultado que o exemplo anterior:
+
+```cs
+int i = default //inicializado a 0
+```
+
+Na prática, podemos ver o literal `default` como possuindo um comportamento muito semelhante ao `null`. Por outras palavras, estamos a falar de um elemento sem tipo predefinido, que pode adquirir um tipo através de uma conversão implícita ou explícita. Contudo, ao contrário do que acontece com `null`, `default` pode mesmo ser convertido em qualquer tipo T (incluindo-se aqui os tipos não *nullable*), sendo equivalente a `default(T)`. Quando estamos perante tipos onde o uso de `default`e `null` é permitido, então `default` possui o valor `null`. 
+
 
 ## Conclusão
 
