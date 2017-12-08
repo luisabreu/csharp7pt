@@ -28,7 +28,7 @@ Portanto, se, no método `ImprimeIdade` apresentado no excerto anterior, alterar
 ```cs
 static class Informacao
 {
- static void ImprimeIdade(int	 idade)
+ static void ImprimeIdade(int	idade)
  {
   idade = idade + 1;
   Console.WriteLine($" Voce tem: {idade}");
@@ -107,6 +107,10 @@ else
   Console.WriteLine("Sem conversão");
 }
 ```
+
+> **Parâmetros do tipo por valor passados por referência**<br>
+>O C# 7.2 introduz um novo qualificador (`in`) que pode ser utilizado para permitir a passagem por referência de valores do tipo por valor. No (capítulo 10)[10-referencesemanticswithvaluetypes.md], analisamos detalhadamente esta funcionalidade.<br>
+
 
 ## Sintaxe
 
