@@ -77,3 +77,21 @@ public void Testa(in double valor)
 ```
 
 A utilização do qualificador `in` para caraterizar parâmetros que recebem elementos dos chamados tipos por referência é possível, mas não traz grandes benefícios (excluíndo, claro, o facto de aplicação deste qualificador impedir a modificação do valor do parâmetro no interior do método).
+
+
+## *ref readonly* de tipos por valor
+
+A versão 7.2 da linguagem introduz ainda o conceito de devolução por referência de elementos dos chamados tipo por valor: para isso, temos de anotar o tipo de retorno do membro com os termos `ref readonly`. Qualquer tentativa de modificar um valor anotado com estes elementos é automaticamente detetada pelo compilador e transformada num erro de compilação. Uma vez que o compilador não consegue saber se os membros desse tipo por valor modificam a estrutura, então acaba por criar uma cópia do valor retornado (o que acaba por garantir que o valor devolvido nunca é modificado). 
+
+Regressando ao nosso exemplo baseado no tipo `Ponto`. é bem provável que existam várias operações que necessitem de utilizar o chamado ponto de referência - com coordenadas (0,0). Nestes casos, podíamos anotar o tipo de retorno de um método ou propriedade deste tipo com os termos `ref readonly`:
+
+```cs
+public struct Ponto
+{
+    public double X;
+    public double Y;
+
+    private static Ponto _origem = new Ponto();
+    public static ref readonly Ponto Origem => ref _origin;
+}
+```
