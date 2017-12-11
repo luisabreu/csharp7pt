@@ -83,7 +83,7 @@ A utilização do qualificador `in` para caraterizar parâmetros que recebem ele
 
 A versão 7.2 da linguagem introduz ainda o conceito de devolução por referência de elementos dos chamados tipo por valor: para isso, temos de anotar o tipo de retorno do membro com os termos `ref readonly`. Qualquer tentativa de modificar um valor anotado com estes elementos é automaticamente detetada pelo compilador e transformada num erro de compilação. Uma vez que o compilador não consegue saber se os membros desse tipo por valor modificam a estrutura, então acaba por criar uma cópia do valor retornado (o que acaba por garantir que o valor devolvido nunca é modificado). 
 
-Regressando ao nosso exemplo baseado no tipo `Ponto`. é bem provável que existam várias operações que necessitem de utilizar o chamado ponto de referência - com coordenadas (0,0). Nestes casos, podíamos anotar o tipo de retorno de um método ou propriedade deste tipo com os termos `ref readonly`:
+Regressando ao nosso exemplo baseado no tipo `Ponto`, é bem provável que existam várias operações que necessitem de utilizar o chamado ponto de origem, caraterizado pelas coordenadas (0,0). Nestes casos, podíamos anotar o tipo de retorno de um método ou propriedade utilizada para este objetivo com os termos `ref readonly`:
 
 ```cs
 public struct Ponto
@@ -95,3 +95,26 @@ public struct Ponto
     public static ref readonly Ponto Origem => ref _origin;
 }
 ```
+
+A partir desta altura, o comportamento associado à recuperação do valor da propriedade dependerá sempre da forma como a variável for declarada:
+
+```cs
+var origem = Ponto.Origem;
+``` 
+
+No exemplo anterior, a variável `origem` contém uma cópia do valor devolvido pela propriedade estática `Origem`. No excerto seguinte, a utilização dos termos `ref readonly` faz com que `origem2` referencie diretamente o espaço de memória referenciado pelo campo estático `_origem` (devolvido a partir da propriedade `Origem`):
+
+```cs
+ref readonly var origem2 = Ponto.Origem;
+```
+
+A partir desta altura, qualquer tentativa de modificar o valor referenciado pela variável `origem2` resulta num erro de compilação. 
+
+Nesta altura, o leitor poderá estar a se interrogar acerca das regras que regem os valores que podem ser devolvidos a partir de um membro cujo tipo de retorno foi qualificado pelos termos `ref readonly`. Nesta altura, é possível retornar:
+1. referências para variáveis alocadas na *heap*;
+2. parâmetros anotados com o qualificador  `in`;
+3. parâmetros de saída (`out`);
+4. campos de estruturas (`struct`) desde que o recetor também seja seguro para ser devolvido desta forma;
+5. um `ref readonly` obtido a partir da invocação de outro método se todos os valores passados aos parâmetros desse método forem seguros para retornar.
+
+Como seria de esperar, o valor `this` não é seguro para devolver a partir de um membro de uma`struct`. Para além disso, os chamados *rvalues* também não podem ser devolvidos a partir deste tipo de membros.
