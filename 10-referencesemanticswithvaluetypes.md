@@ -74,6 +74,9 @@ public void Testa(in double valor)
 
 A utilização do qualificador `in` para caraterizar parâmetros que recebem elementos dos chamados tipos por referência é possível, mas não traz grandes benefícios (excluíndo, claro, o facto de aplicação deste qualificador impedir a modificação do valor do parâmetro no interior do método).
 
+No que diz respeito à captura de parâmetros caraterística dos métodos assíncronos e das expressões *Lambda*, o comportamento é precisamente o mesmo que carateriza o uso dos qualificadores `ref` e `out´:
+
+
 
 
 
