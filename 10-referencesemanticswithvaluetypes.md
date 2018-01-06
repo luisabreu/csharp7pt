@@ -155,7 +155,7 @@ Calculadora.Duplica(in 2); //oops
 Calculadora.Duplica(2); //ok
 ```
 
-A passagem de um valor literal ao método duplica segue os mesmos principios de uma passagem por valor tradicional. Ao encontrar o código anterior, o compilador efetua uma transformação semelhante à seguinte:
+A passagem de um valor literal ao método `Duplica` segue os mesmos princípios de uma passagem por valor tradicional. Ao contrário do que se possa pensar, isto não implica uma alteração à regras apresentadas até ao momento (ou a adição de uma nova regra). E isto porque, ao encontrar código semelhante ao anterior, o compilador efetua uma transformação semelhante à apresentada no excerto seguinte:
 
 ```cs
 var aux = 2;
@@ -163,6 +163,17 @@ Calculadora.Duplica(in aux); //ok
 ```
 
 Portanto, o compilador começa por criar uma variável que é inicializada com uma cópia do valor 2. Em seguida, essa cópia é passada por referência de leitura ao método `Duplica`. Portanto, a passagem do valor literal não invalida nenhuma das regras apresentadas até ao momento (note-se como o compilador transforma o valor literal num *lvalue* antes de passá-lo ao método). Na realidade, ao permitir a passagem direta do valor literal, o compilador acaba apenas por nos poupar algum trabalho extra.
+
+A discussão anterior permite-nos concluir que  criação de variáveis temporárias é necessária é alguns casos por forma a garantir que os parâmetros anotados com o qualificador `in` recebem sempre *lvalues*. Para além do cenário anterior (onde um valor literal foi passado ao método sem ser anotado com o qualificador `in`), a aplicação de um valor predefinido a um parâmetros deste tipo também pode resultar na criação de um valor temporário:
+
+```cs
+public static int Duplica(in int x  = 2)
+{
+    return x * 2;
+}
+
+Calculadora.Duplica(); //criada var temporaria inicializada com valor 2
+```
 
 No que diz respeito à captura de parâmetros caraterística dos métodos assíncronos e das expressões *Lambda*, o comportamento é precisamente o mesmo que carateriza o uso dos qualificadores `ref` e `out´. Portanto, estes parâmetros:
 * não podem ser capturados nas *closures*;
