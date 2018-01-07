@@ -164,7 +164,7 @@ Calculadora.Duplica(in aux); //ok
 
 Portanto, o compilador começa por criar uma variável que é inicializada com uma cópia do valor 2. Em seguida, essa cópia é passada por referência de leitura ao método `Duplica`. Portanto, a passagem do valor literal não invalida nenhuma das regras apresentadas até ao momento (note-se como o compilador transforma o valor literal num *lvalue* antes de passá-lo ao método). Na realidade, ao permitir a passagem direta do valor literal, o compilador acaba apenas por nos poupar algum trabalho extra.
 
-A discussão anterior permite-nos concluir que  criação de variáveis temporárias é necessária é alguns casos por forma a garantir que os parâmetros anotados com o qualificador `in` recebem sempre *lvalues*. Para além do cenário anterior (onde um valor literal foi passado ao método sem ser anotado com o qualificador `in`), a aplicação de um valor predefinido a um parâmetros deste tipo também pode resultar na criação de um valor temporário:
+A discussão anterior permite-nos concluir que  criação de variáveis temporárias é necessária é alguns casos para garantir que os parâmetros anotados com o qualificador `in` recebem sempre *lvalues*. Para além do cenário anterior (onde um valor literal foi passado ao método sem ser anotado com o qualificador `in`), a aplicação de um valor predefinido a um parâmetros deste tipo também pode resultar na criação de um valor temporário:
 
 ```cs
 public static int Duplica(in int x  = 2)
@@ -183,7 +183,7 @@ No que diz respeito à captura de parâmetros caraterística dos métodos assín
 
 ## *ref readonly* de tipos por valor
 
-A versão 7.2 da linguagem introduz ainda o conceito de devolução por referência de elementos dos chamados tipo por valor: para isso, temos de anotar o tipo de retorno do membro com os termos `ref readonly`. Qualquer tentativa de modificar um valor anotado com estes elementos é automaticamente detetada pelo compilador e transformada num erro de compilação. Uma vez que o compilador não consegue saber se os membros desse tipo por valor modificam a estrutura, então acaba por criar uma cópia do valor retornado (o que acaba por garantir que o valor devolvido nunca é modificado). 
+A versão 7.2 da linguagem introduz ainda o conceito de devolução por referência de elementos dos chamados tipo por valor: para isso, temos de anotar o tipo de retorno do membro com os termos `ref readonly`. Qualquer tentativa de modificar um valor devolvido por um método cujo tipo de retorno tenha sido anotado com estes qualificadores é automaticamente detetada pelo compilador e transformada num erro de compilação. Uma vez que o compilador não consegue saber se os membros desse tipo por valor modificam a estrutura, então acaba por criar uma cópia do valor retornado (o que acaba por garantir que o valor devolvido nunca é modificado). 
 
 Regressando ao nosso exemplo baseado no tipo `Ponto`, é bem provável que existam várias operações que necessitem de utilizar o chamado ponto de origem, caraterizado pelas coordenadas (0,0). Nestes casos, podíamos anotar o tipo de retorno de um método ou propriedade utilizada para este objetivo com os termos `ref readonly`:
 
