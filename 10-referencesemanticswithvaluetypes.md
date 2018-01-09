@@ -155,7 +155,7 @@ Calculadora.Duplica(in 2); //oops
 Calculadora.Duplica(2); //ok
 ```
 
-A passagem de um valor literal ao método `Duplica` segue os mesmos princípios de uma passagem por valor tradicional. Ao contrário do que se possa pensar, isto não implica uma alteração à regras apresentadas até ao momento (ou a adição de uma nova regra). E isto porque, ao encontrar código semelhante ao anterior, o compilador efetua uma transformação semelhante à apresentada no excerto seguinte:
+A passagem de um valor literal ao método `Duplica` segue os mesmos princípios de uma passagem por valor tradicional. Ao contrário do que se possa pensar, isto não implica uma alteração à regras apresentadas até ao momento (ou mesmo a adição de uma nova regra). E isto porque, ao encontrar código semelhante ao anterior, o compilador efetua uma transformação semelhante à apresentada no excerto seguinte:
 
 ```cs
 var aux = 2;
