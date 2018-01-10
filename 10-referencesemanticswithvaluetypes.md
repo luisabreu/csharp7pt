@@ -185,6 +185,8 @@ No que diz respeito à captura de parâmetros caraterística dos métodos assín
 
 A versão 7.2 da linguagem introduz ainda o conceito de devolução por referência de elementos dos chamados tipo por valor: para isso, temos de anotar o tipo de retorno do membro com os termos `ref readonly`. Qualquer tentativa de modificar um valor devolvido por um método cujo tipo de retorno tenha sido anotado com estes qualificadores é automaticamente detetada pelo compilador e transformada em erro de compilação. 
 
+### Devolução de valores a partir de membros anotados com ´ref readonly`
+
 Regressando ao nosso exemplo baseado no tipo `Ponto`, é bem provável que existam várias operações que necessitem de utilizar o chamado ponto de origem, caraterizado pelas coordenadas (0,0). Nestes casos, podíamos anotar o tipo de retorno de um método ou propriedade utilizada para este objetivo com os termos `ref readonly`:
 
 ```cs
@@ -194,31 +196,41 @@ public struct Ponto
     public double Y;
 
     private static Ponto _origem = new Ponto();
-    public static ref readonly Ponto Origem => ref _origin;
+    public static ref readonly Ponto Origem => ref _origem;
 }
 ```
 
-Neste exemplo, a propriedade `Origem` devolve uma referência de leitura para o campo privado `_origem`. O leitor atento reparou, com toda a certeza, que o valor devolvido a partir da propriedade é anotado apenas com o termo `ref` e não com os termos `ref readonly`. A equipa de desenho achou que forçar o uso dos termos `ref readonly` aos valores devolvidos resultavam na criação de expressões longas, que acabavam por dificultar a leitura. Uma vez que o contexto de leitura (`readonly`) pode ser obtido a partir da análise da assinatura do membro e como nestes casos o valor devolvido nunca pode ser um valor local ao membro, então decidiu-se utilizar exatamente a mesma sintaxe que é utilizada na devolução de [valores por referência] (3-refs.md).
+Neste exemplo, a propriedade `Origem` devolve uma referência de leitura para o campo privado `_origem`. O leitor atento reparou, com toda a certeza, que o valor devolvido a partir da propriedade é anotado apenas com o termo `ref` e não com os termos `ref readonly`. A equipa de desenho concluíu  que o uso dos termos `ref readonly` aos valores devolvidos resultavam na criação de expressões longas, que acabavam por dificultar a leitura. Uma vez que o contexto de leitura (`readonly`) pode ser obtido a partir da análise da assinatura do membro e como nestes casos o valor devolvido nunca pode ser um valor local ao membro, então decidiu-se utilizar exatamente a mesma sintaxe que é utilizada na devolução de [valores por referência] (3-refs.md).
 
-A partir desta altura, o comportamento associado à recuperação do valor da propriedade dependerá sempre da forma como a variável for declarada:
+No que diz respeito aos valores devolvidos a partir de membros, as regras que os regem são semelhantes às que regem os valores devolvidos por referência (e que foram descritos detalhadamente no [capítulo 3(3-refs.md)]). A lista seguinte apresenta as regras que regem os valores que podem ser devolvidos por membros que recorrem aos qualificadores `ref readonly`:
+1. referências para variáveis alocadas na *heap*;
+2. parâmetros anotados com o qualificador  `in`;
+3. parâmetros de saída (`out`);
+4. campos de estruturas (`struct`) desde que o recetor também seja seguro para ser devolvido desta forma;
+5. um `ref` obtido a partir da invocação de outro método se todos os valores passados aos parâmetros `ref`/`out` desse método também forem seguros para retornar.
+
+Como seria de esperar, o valor `this` não é seguro para devolver a partir de um membro de uma`struct`. Para além disso, os chamados *rvalues* também não podem ser devolvidos a partir deste tipo de membros.
+
+
+### Invocação de membros que anotados com `ref readonly`
+
+A sintaxe utilizada na atribuição de um valor devolvido por um membro anotado com o `ref readonly` define o comportamento dessa expressão. Voltando ao nosso exemplo inicial, o comportamento associado à recuperação do valor da propriedade `Origem` dependerá sempre da forma como a variável for inicializada:
 
 ```cs
 var origem = Ponto.Origem;
 ``` 
 
-No exemplo anterior, a variável `origem` contém uma cópia do valor devolvido pela propriedade estática `Origem`. No excerto seguinte, a utilização dos termos `ref readonly` faz com que `origem2` referencie diretamente o espaço de memória referenciado pelo campo estático `_origem` (devolvido a partir da propriedade `Origem`):
+No exemplo anterior, a variável `origem` contém uma **cópia** do valor devolvido pela propriedade estática `Origem`. Por outras palavras, a variável `origem` contém uma cópia do valor retornado pela propriedade `Origem`. No excerto seguinte, este comportamento é alterado através da aplicação dos termos `ref readonly` e `ref`. Neste caso, `origem2` referencia diretamente o espaço de memória referenciado pelo campo estático `_origem` (que, por sua vez, foi devolvido a partir da propriedade `Origem`):
 
 ```cs
-ref readonly var origem2 = Ponto.Origem;
+ref readonly var origem2 = ref Ponto.Origem;
 ```
 
-A partir desta altura, qualquer tentativa de modificar o valor referenciado pela variável `origem2` resulta num erro de compilação. 
+A partir desta altura, qualquer tentativa de modificar o valor referenciado pela variável `origem2` (ou qualquer um dos campos da `struct` - ex.: `origem2.X = 20;`) resulta num erro de compilação. 
 
-Nesta altura, o leitor poderá estar a se interrogar acerca das regras que regem os valores que podem ser devolvidos a partir de um membro cujo tipo de retorno foi qualificado pelos termos `ref readonly`. Nesta altura, é possível retornar:
-1. referências para variáveis alocadas na *heap*;
-2. parâmetros anotados com o qualificador  `in`;
-3. parâmetros de saída (`out`);
-4. campos de estruturas (`struct`) desde que o recetor também seja seguro para ser devolvido desta forma;
-5. um `ref readonly` obtido a partir da invocação de outro método se todos os valores passados aos parâmetros desse método forem seguros para retornar.
 
-Como seria de esperar, o valor `this` não é seguro para devolver a partir de um membro de uma`struct`. Para além disso, os chamados *rvalues* também não podem ser devolvidos a partir deste tipo de membros.
+# Tipo `readonly struct`
+
+Como vimos, a devolução de referências de leitura para elementos do tipo por valor é possibilitada pelo uso de `ref readonly` aos tipos de retorno de um membro. Contudo, a definição de métodos para garantir o uso de referências de leitura para elementos destes tipo pode não fazer sendto. Foi a pensar neste (e noutros cenários) que a equipa decidiu permitir a aplicação do termo `readonly` à definição de uma `struct`.
+
+Quando aplicamos este termo a uma `struct`, o compilador garante que todos os seus membros passam a ser de leitura. Por outras palavras, ao aplicarmos este termo, temos a garantia de que a `struct` passa a ser imutável. A aplicação deste termo permite ainda outras otimizações. Por exemplo, podemos aplicar o qualificador `in` em todos os locais onde uma `struct`deste tipo for passada a um método através de parâmetro. 
