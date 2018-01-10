@@ -183,7 +183,7 @@ No que diz respeito à captura de parâmetros caraterística dos métodos assín
 
 ## *ref readonly* de tipos por valor
 
-A versão 7.2 da linguagem introduz ainda o conceito de devolução por referência de elementos dos chamados tipo por valor: para isso, temos de anotar o tipo de retorno do membro com os termos `ref readonly`. Qualquer tentativa de modificar um valor devolvido por um método cujo tipo de retorno tenha sido anotado com estes qualificadores é automaticamente detetada pelo compilador e transformada num erro de compilação. Uma vez que o compilador não consegue saber se os membros desse tipo por valor modificam a estrutura, então acaba por criar uma cópia do valor retornado (o que acaba por garantir que o valor devolvido nunca é modificado). 
+A versão 7.2 da linguagem introduz ainda o conceito de devolução por referência de elementos dos chamados tipo por valor: para isso, temos de anotar o tipo de retorno do membro com os termos `ref readonly`. Qualquer tentativa de modificar um valor devolvido por um método cujo tipo de retorno tenha sido anotado com estes qualificadores é automaticamente detetada pelo compilador e transformada em erro de compilação. 
 
 Regressando ao nosso exemplo baseado no tipo `Ponto`, é bem provável que existam várias operações que necessitem de utilizar o chamado ponto de origem, caraterizado pelas coordenadas (0,0). Nestes casos, podíamos anotar o tipo de retorno de um método ou propriedade utilizada para este objetivo com os termos `ref readonly`:
 
@@ -197,6 +197,8 @@ public struct Ponto
     public static ref readonly Ponto Origem => ref _origin;
 }
 ```
+
+Neste exemplo, a propriedade `Origem` devolve uma referência de leitura para o campo privado `_origem`. O leitor atento reparou, com toda a certeza, que o valor devolvido a partir da propriedade é anotado apenas com o termo `ref` e não com os termos `ref readonly`. A equipa de desenho achou que forçar o uso dos termos `ref readonly` aos valores devolvidos resultavam na criação de expressões longas, que acabavam por dificultar a leitura. Uma vez que o contexto de leitura (`readonly`) pode ser obtido a partir da análise da assinatura do membro e como nestes casos o valor devolvido nunca pode ser um valor local ao membro, então decidiu-se utilizar exatamente a mesma sintaxe que é utilizada na devolução de [valores por referência] (3-refs.md).
 
 A partir desta altura, o comportamento associado à recuperação do valor da propriedade dependerá sempre da forma como a variável for declarada:
 
