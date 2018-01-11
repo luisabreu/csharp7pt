@@ -233,7 +233,9 @@ A partir desta altura, qualquer tentativa de modificar o valor referenciado pela
 
 Como vimos, a devolução de referências de leitura para elementos do tipo por valor é possibilitada pelo uso de `ref readonly` aos tipos de retorno de um membro. Contudo, a definição de métodos para garantir o uso de referências de leitura para elementos destes tipo pode não fazer sendto. Foi a pensar neste (e noutros cenários) que a equipa decidiu permitir a aplicação do termo `readonly` à definição de uma `struct`.
 
-Quando aplicamos este termo a uma `struct`, o compilador garante que todos os seus membros passam a ser de leitura. Por outras palavras, ao aplicarmos este termo, temos a garantia de que a `struct` passa a ser imutável. A aplicação deste termo permite ainda outras otimizações. Por exemplo, podemos aplicar o qualificador `in` em todos os locais onde uma `struct`deste tipo for passada a um método através de parâmetro. O tipo `Ponto`introduzido na secção anterior é um bom candidado a esta alteração:
+Quando aplicamos este termo a uma `struct`, o compilador garante que todos os seus membros passam a ser de leitura. Por outras palavras, ao aplicarmos este termo, temos a garantia de que a `struct` passa a ser imutável. A aplicação deste termo permite ainda outras otimizações. Por exemplo, podemos aplicar o qualificador `in` em todos os locais onde uma `struct`deste tipo for passada a um método através de parâmetro. Para além disso, o próprio compilador gera código mais eficiente para aceder aos membros de uma estrutura deste tipo: nestes casos, o valor `this` é mesmo passado por referência ao membro através de um parâmetro *in* (em vez de ser criada uma cópia como acontece normalmente).
+
+Para ilustrarmos a criação deste tipo de estrutura, vamos modificar o tipo `Ponto` que foi introduzido na secção anterior:
 
 ```cs
 public readonly struct Ponto
@@ -246,4 +248,5 @@ public readonly struct Ponto
 }
 ```
 
-A aplicação deste qualificador a uma `struct`tem algumas implicações. Uma delas (que, aliás, podemos ver no exemplo anterior) passa pela necessidade de todos os campos terem de ser de leitura. Para além disso, eventuais auto-propriedades também têm de ser de leitura apenas e não podem conter os chamados *field-like eventos* (declarados através do termo `event`).
+A aplicação deste qualificador a uma `struct`tem algumas implicações. Uma delas (que, aliás, podemos ver no exemplo anterior) passa pela necessidade de todos os campos terem de ser definidos como campos de leitura (note-se o uso do qualificador `readonly`). Eventuais auto-propriedades definidas por `struct` deste tipo também têm de ser de leitura apenas e não podem conter os chamados *field-like events* (declarados através do termo `event`).
+
