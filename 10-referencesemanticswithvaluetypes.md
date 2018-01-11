@@ -250,3 +250,28 @@ public readonly struct Ponto
 
 A aplicação deste qualificador a uma `struct`tem algumas implicações. Uma delas (que, aliás, podemos ver no exemplo anterior) passa pela necessidade de todos os campos terem de ser definidos como campos de leitura (note-se o uso do qualificador `readonly`). Eventuais auto-propriedades definidas por `struct` deste tipo também têm de ser de leitura apenas e não podem conter os chamados *field-like events* (declarados através do termo `event`).
 
+
+# Tipo `ref struct`
+
+Este novo tipo permite-nos definir um tipo por valor que apenas deve ser alocado na *stack*. Por outras palavras, estes tipos não podem ser definidos como membros dos chamados tipos por referência. A principal razão para a introdução destes tipos foi o novo tipo [Span<T>](https://blogs.msdn.microsoft.com/dotnet/2017/11/15/welcome-to-c-7-2-and-span/), que promete revolucionar a forma como trabalhamos com porções de memória em código C#. Internamente, este novo tipo contém apenas dois membros: um apontador e um campo que indica o tamanho da memória gerida pelo *span* (na realidade, este tipo é implementado de forma "mágica", já que a linguagem não permite o uso de apontadores em contextos seguros - isto é, fora de blocos *unsafe*). 
+
+Na prática, isto significa que não é possível garantir a modificação de ambos os campos da estrutura de forma atómica se este elemento pudesse ser alocado na *heap*. Ao restringirmos  este elemento à *stack*, passamos a evitar alguns erros problemáticos (ex.: *out od range*, violações de *type safety*, ext.).
+
+A introdução deste novo tipo traz um conjunto de novas regras que contribuem para que o seu uso seja seguro:
+* um elemento deste tipo nãoestá sujeito a operações de *boxing*;
+* estes elementos não podem ser definidos como membros de tipos por referência ou de tipos por valor regulares;
+* estes elementos não podem ser definidos como variáveis no interior de métodos assíncronos, expressões *lambda*, funções locais ou *iterators*.
+
+
+## Conclusão
+
+Este capítulo dedicou-se à análise de algumas das novas funcionalidades introduzidas pelo C# 7.2 que nos permitem utilizar a referências para tipos por valor no código C# que escrevemos. Como foi possível verificar, estas novas funcionalidades introduzidas pelo C# 7.2 complementam as introduzidas pela versão 7.1. Portanto, mantém-se a tónica de melhorar a linguagem por forma a otimizar o código escrito naqueles casos onde é necessário reduzir as alocações por questões de performance.
+
+No próximo capítulo, continuamos a analisar as novidades introduzidas pelo C# 7.2 e vamos ver como a versão 7.2 permite o uso de novos modificadores de acesso e define novas regras para definição dos valores dos parâmetros passados a um método.
+
+
+### Bibliografia
+["What's new in C# 7.2"](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7-2)
+["Reference semantics with value types"](https://docs.microsoft.com/en-us/dotnet/csharp/reference-semantics-with-value-types
+)
+["Readonly references"](https://github.com/dotnet/csharplang/blob/master/proposals/csharp-7.2/readonly-ref.md)
