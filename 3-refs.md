@@ -261,6 +261,11 @@ ref var j = ref i; // j e um alias para i
 A introdução da devolução de valores por referência e das variáveis por referência serão especialmente úteis quando necessitamos de desenvolver algoritmos eficientes e queremos evitar as cópias associadas ao uso dos chamados tipos por valor (*value types*). É provável que esta seja uma funcionalidade com pouco uso para a grande maioria dos programadores, mas resta-nos o conforto de saber que se precisarmos de eficiência, já não temos de recorrer diretamente a apontadores como acontecia até ao lançamento da versão 7 do C#.
 
 
+## Devolução de referências de leitura
+
+Com o C# 7.2, a linguagem passa a prever a devolução de referências de leitura para elementos dos chamados tipos por valor. Em vez de colocarmos essas novidades aqui, optámos por colocá-las no [capítulo 10](10-referencesemanticswithvaluetypes.md), onde abordamos todas as novidades suportadas pelo C# 7.2 no que diz respeito ao uso de referências de leitura para tipos por valor.
+
+
 ## Conclusão
 
 Este capítulo dedicou-se à análise de todas as particularidades associadas à devolução de valores por referência a partir de um método. Depois de explicar a motivação que levou à introdução desta nova funcionalidade, o capítulo introduziu ainda o conceito de variável por referência. Como vimos, estas variáveis podem ser utilizadas para referenciarem outras posições de memória obtidas à custa da invocação de um método que devolve um valor por referência.
