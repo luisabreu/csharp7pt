@@ -1,19 +1,17 @@
 # Tipos por valor (*value types*) com comportamento de tipos por referência (*reference types*)
 
-Desdes os seus primórdios, a plataforma .NET caraterizou sempre os tipos em duas categorias, normalmente designados por tipos por valor (também conhecidos por *value types*) e por tipos por referência (*reference types*). Como seria de esperar, cada um possui vantagens e desvantagens. Uma das principais vantagens inerentes ao uso dos tipos por valor reside no facto de podermos criar elementos deste tipo sem que isso resulte em alocações efetuadas na *heap* (a gestão automática de memória efetuada pelo *GC* pode introduzir algumas penalizações a nível de *performance*, pelo que a sua não utilização pode, em alguns cenários, conduzir a melhorias a nível da *performance* de uma aplicação).
+Desdes os seus primórdios, a plataforma .NET caraterizou sempre os tipos em duas categorias. De um lado, temos os chamados tipos por valor (também conhecidos por *value types*). Do outro, temos os tipos por referência (*reference types*). Como seria de esperar, cada um possui vantagens e desvantagens. Uma das principais vantagens inerentes ao uso dos tipos por valor reside no facto de podermos criar elementos deste tipo sem que isso resulte em alocações efetuadas na *heap*. Como é do conhecimento geral, a gestão automática de memória efetuada pelo *GC* pode introduzir algumas penalizações a nível de *performance*, pelo que a sua não utilização pode, em alguns cenários, melhorar a *performance* de uma aplicação.
 
-Por outro lado, os elementos deste tipo são amazenados na *stack* (que, tradicionalmente, possui uma capacidade bem menor do que a disponibilizada pela *heap*) e são copiados por valor. Por outras palavras, qualquer atribuição de um elemento deste tipo a uma outra variável resulta sempre na criação de uma cópia desse elemento (portanto, uma simples atribuição resulta na duplicação completa da memória utilizada pelo valor original). Este comportamento predefinido faz com que o uso de elementos destes tipos não sejam  recomendados em alguns casos. Por exemplo, a utilização de elementos deste tipo quando estamos perante algoritmos que efetuam cópias sucessivas de valores (ex.: invocação recursiva de métodos) pode conduzir a um esgotamento da *stack* em alguns casos. Felizmente para nós, e como veremos em seguida, algumas destas questões são resolvidas com as novidades introduzidas pelo lançamento do C# 7.2.
+Assim, os elementos deste tipo são amazenados na *stack*, que, tradicionalmente, possui uma capacidade bem menor do que a disponibilizada pela *heap* (normalmente, o espaço de armazenamento é de cerca de 1MB). Para além disso, estes elementos são copiados por valor. Por outras palavras, uma simples atribuição ou a passagem de um valor deste tipo a um parâmetro aquando da invocação de um método resulta sempre na duplicação da memória utilizada pelo valor original. Este comportamento predefinido pode introduzir alguns problemas quando estamos perante determinados cenários, como, por exemplo, algoritmos que recursivos que acabam por efetuar cópias sucessivas de valores. Nestes casos, o comportamento predefinido destes tipos rapidamente conduz a um esgotamento da *stack*. Felizmente para nós, e como veremos em seguida, algumas destas questões são resolvidas com as novidades introduzidas pelo lançamento do C# 7.2.
 
 
-## O qualificador `in`
+## Parâmetros `in`
 
-Uma das novidades introduzidas pelo C# 7.2 é a passagem de referências de leitura para tipos por valor. Como é possível depreender a partir da frase anterior, esta nova funcionalidade permite-nos passar valores deste tipo através de referências, que não podem ser modificadas no interior do método que as recebem. Um parâmetro que deseja utilizar este comportamento tem de ser anotado com o qualificador `in`.
+Uma das novidades introduzidas pelo C# 7.2 é a passagem de tipos por valor para métodos através de referências de leitura. Como é possível depreender a partir da frase anterior, esta nova funcionalidade permite-nos, a partir do interior de um método, utilizar referências para tipos por valor que lhe são passados aquando da sua invocação. Os valores referenciados por estes parâmetros não podem ser modificados no interior dos métodos. Par que Um parâmetro possua este comportamento, ele tem de ser anotado com o qualificador `in`. Normalmente, estes parâmetros são designados na literatura por parâmetros `in`.
 
-Os parâmetros anotados com este qualificador referenciam diretamente o espaço de memória da variável utilizada na sua inicialização (aquando da invocação do método). Nesta altura, o leitor poderá estar a se interrogar acerca da necessidade de introdução deste novo qualificador. Afinal de contas, a passagem por referência já é suportada desde a primeira versão da linguagem, nomeadamente através do uso do qualificador `ref`.
+Como referimos, os parâmetros anotados com este qualificador referenciam diretamente o espaço de memória da variável que foi utilizada na sua inicialização aquando da invocação do método. Nesta altura, o leitor poderá estar a se interrogar acerca da necessidade de introdução deste novo qualificador. Afinal de contas, a passagem por referência já é suportada desde a primeira versão da linguagem, nomeadamente através do uso do qualificador `ref`.
 
-Na verdade, existe uma diferença de comportamento importante associada ao uso deste qualificador (`in`) quando comparado com o qualificador `ref`: como mencionámos, o seu uso impede a modificação do valor referenciado pelo parâmetro no interior do método. Portanto, estamos perante um novo qualificador que complementa os termos reservados `ref` e `out` e que veio colmatar uma lacuna relacionada com a forma como podemos passar valores a métodos através de parâmetros.
-
-Nesta altura, não devem restar dúvidas quanto ao papel do novo qualificador: é usado apenas para passar um parâmetro por referência, não permitindo a sua modificação no interior do método. Para ilustrar o uso deste novo qualificador, vamos começar por introduzir o tipo por valor `Ponto` (note-se o uso do termo reservado `struct`), caraterizado pelas propriedades `X` e `Y`:
+Existe, contudo, uma diferença de comportamento importante associada ao uso deste qualificador (`in`) quando comparado com o qualificador `ref`: como mencionámos, o seu uso impede a modificação do valor referenciado pelo parâmetro no interior do método. Portanto, estamos perante um novo qualificador que complementa os termos reservados `ref` e `out` e que veio colmatar uma lacuna relacionada com a forma como podemos passar valores a métodos através de parâmetros. Para ilustrar o uso deste novo qualificador, vamos começar por introduzir o tipo por valor designado por `Ponto` (note-se o uso do termo reservado `struct`), que é caraterizado pelas propriedades `X` e `Y`:
 
 ```cs
 public struct Ponto
@@ -23,7 +21,7 @@ public struct Ponto
 }
 ```
 
-Vamos ainda supor que temos uma classe auxiliar (`Calculadora`), com um método designado por `Calcula` que é responsável por calcular a distância entre dois pontos:
+Vamos ainda supor que temos uma classe auxiliar (`Calculadora`), com um método designado por `Calcula`, cujo papel é calcular a distância entre dois pontos:
 
 ```cs
 public static class Calculadora
@@ -43,18 +41,19 @@ void Main(){
 }
 ```
 
-O método recebe (através de parâmetros) dois elementos do tipo por valor (uma vez mais, note-se como `Ponto` é representado através de uma `struct`), sendo que cada um deles necessita de (pelo menos) 16 bytes de espaço (recorde-se que cada `double` ocupa 8 bytes). Portanto, sem o qualificador `in`, cada invocação do método `Calcula` resulta numa alocação de 32 bytes. Neste caso, a realização dessas cópias não é necessária e pode ser omitida através do uso do qualificador `in`. A aplicação deste atributo a estes parâmetros permite-nos consumir menos memória. Neste caso concreto, necessitamos apenas de 8 ou 16 bytes, dependendo este valor do tipo de arquitetura onde o código é executado (em sistemas de 32 bits, cada apontador é representado por 4 bytes, pelo que o espaço necessário à passagem dos dois parâmetros resume-se apenas a 8 bytes).
+O método recebe (através de parâmetros) dois elementos do tipo por valor (uma vez mais, note-se como `Ponto` é representado através de uma `struct`), sendo que cada um deles necessita de (pelo menos) 16 bytes de espaço (um `double` necessita de 8 bytes, pelo que a `struct` necessita de 16 bytes para armazenar os valores `X` e `Y`). Portanto, sem o qualificador `in`, cada invocação do método `Calcula` resulta numa alocação de 32 bytes (resultantes da passagem por valor dos dois parâmetros). Neste caso, a realização dessas cópias não é necessária e pode ser omitida através do uso do qualificador `in`. A aplicação deste atributo a estes parâmetros permite-nos consumir menos memória. Neste caso concreto, necessitamos apenas de 8 ou 16 bytes, dependendo este valor do tipo de arquitetura onde o código é executado. E isto porque a aplicação do qualificador transforma os parâmetros em "apontadores seguros" para os valores que lhe são passados (em sistemas de 32 bits, cada apontador é representado por 4 bytes, pelo que o espaço necessário à passagem dos dois parâmetros resume-se apenas a 8 bytes).
 
-No exemplo anterior, os ganhos a nível de espaço são reduzidos. Contudo, a situação mudaria rapidamente de figura se, por exemplo, estivermos perante invocações sucessivas de um método no interior de um ciclo. 
+No exemplo anterior, os ganhos a nível de espaço são reduzidos. Contudo, a situação mudaria rapidamente de figura se, por exemplo, estivessemos perante invocações sucessivas de um método no interior de um ciclo. 
 
 
 ### Regras para a utilização do qualificador `in`
 
-Os parâmetros anotados com o qualificador `in` seguem regras semelhantes às aplicadas aos campos de leitura (`readonly`). Por exemplo, quando este qualificador é aplicado a um parâmetro de um tipo por valor, então todos os campos desse valor são automaticamente transformados em campos de leitura:
+Os parâmetros anotados com o qualificador `in` possuem um comportamento muito semelhante aos campos de leitura de uma classe (`readonly`): depois de analisados, os parâmetros deste tipo não podem ser modificados:
 
 ```cs
 public static double Calcula(in Ponto pt1, in Ponto pt2)
 {
+    pt = new Ponto(); //oops, erro
     pt1.X = 20; //oops, erro
     var difX = pt2.X - pt1.X;
     var difY = pt2.Y - pt2.Y;
@@ -75,16 +74,16 @@ public void Testa(in double valor)
 }
 ```
 
-O qualificador `in` pode ser utilizado em qualquer tipo de membro que espera parâmetros (portanto, este qualificador também pode ser utilizado para anotar parâmetros de *delegates*, expressões *Lambda*, funções locais, *indexers* e operadores).
+Para além de métodos, o qualificador `in` pode ser utilizado para anotar parâmetros de *delegates*, expressões *Lambda*, funções locais, *indexers* ou operadores.
 
-À semelhança do que acontecia com os qualificadores `out`e `ref`, também não podemos definir *overloads* de métodos que diferem apenas na aplicação deste novo qualificador. Como seria de esperar, também não podemos aplicar este qualificador a um parâmetro que tenha sido anotado com o qualificador `out` ou `ref`. No que diz respeito à variância que carateriza o uso de genéricos, os parâmetros anotados com o qaulificador `in` são considerados não variantes (*invariant*).
+À semelhança do que acontecia com os qualificadores `out`e `ref`, também não podemos definir *overloads* de métodos que diferem apenas na aplicação deste novo qualificador. Como seria de esperar, também não podemos aplicar este qualificador a um parâmetro que tenha sido anotado com o qualificador `out` ou `ref`. No que diz respeito à variância que carateriza o uso de genéricos, os parâmetros anotados com o qualificador `in` são considerados não variantes (*invariant*).
 
 A utilização do qualificador `in` para caraterizar parâmetros que recebem elementos dos chamados tipos por referência é possível, mas não traz grandes benefícios (excluíndo, claro, o facto de aplicação deste qualificador impedir a modificação do valor do objeto referenciado pelo parâmetro no interior do método).
 
 
-### Invocação de métodos com parmâmetros anotados com o qualificador `in`
+### Invocação de métodos com parâmetros anotados com o qualificador `in`
 
-A aplicação do termo `in` ao valor passado a um parâmetro `in` aquando da invocação não é obrigatória. Note-se, contudo, que a sua aplicação a um valor passado a um parâmetros que não é deste tipo resulta num erro de compilação. Para ilustrar este ponto, vamos começar por adicionar um novo método à classe `Calculadora`:
+A aplicação do termo `in` ao valor passado a um parâmetro `in` aquando da invocação do método não é obrigatória. Note-se, contudo, que a sua aplicação a um valor passado a um parâmetros não `in` resulta num erro de compilação. Para ilustrar este ponto, vamos começar por adicionar um novo método à classe `Calculadora`:
 
 ```cs
 public static class Calculadora
@@ -106,13 +105,13 @@ public static class Calculadora
 Analisemos, agora, o excerto seguinte:
 
 ```cs
-Calculadora.Calcula(pt1, pt2); //ok
-Calculadora.Calcula2(in pt1, in pt2); //erro
+Calculadora.Calcula(pt1, pt2); //ok, passados por ref de leitura
+Calculadora.Calcula2(in pt1, in pt2); //erro, pt2 nao pode ser anotado com in
 ```
 
-A primeira invocação compila sem qualquer erro e, em *runtime*, resulta na passagem por referência (de leitura) dos valores armazenados nas variáveis `pt1` e `pt2`. Por outro lado, a segunda invocação não pode ser efetuada, já que o compilador recusa-se a compilá-la. Neste caso, o problema reside na aplicação do qualificador `in` ao valor passado ao segundo parâmetro do método `Calcula2`. Esta aplicação não é possível, já que este parâmetro não foi anotado com o qualificador `in`. 
+A primeira invocação compila sem qualquer erro e, em *runtime*, resulta na passagem de uma referência (de leitura) dos valores armazenados nas variáveis `pt1` e `pt2`. Por outro lado, o compilador recusa-se a compilar a segunda invocação. Neste caso, o problema reside na aplicação do qualificador `in` ao valor passado através do segundo parâmetro do método `Calcula2`. Esta aplicação não é possível, já que não estamos perante um  parâmetro `in`. 
 
-Outra restrição aplicada aos valores passados aos parâmetros prende-se com o facto de apenas ser possível passar os chamados valores do tipo *LValue* (onde *LValue*  refere-se a expressões que representam localizações de memória que podem ser referidas diretamente). Na prática, e supondo que temos um método designado por `Duplica` que recebe um número inteiro através de um parâmetro `in`:
+Outra restrição aplicada aos valores passados aos parâmetros prende-se com o facto de estes parâmetros apenas poderem ser alimentados com os chamados valores do tipo *LValue* (onde o termo *LValue* é utilizado para representar expressões que identificam localizações de memória que podem ser referidas diretamente). Na prática, e supondo que temos um método designado por `Duplica` que recebe um número inteiro através de um parâmetro `in`:
 
 ```cs
 public static int Duplica(in int x)
@@ -142,9 +141,7 @@ public static void Generico<T>(in T obj){}
 Calculadora.Generico<object>(in Guid.Empty); //oops
 ```
 
-No exemplo anterior, `Guid.Empty` produz um tipo cuja identidade não é convertível no tipo `object`. Ao detetar este problema, o compilador acaba por sinalizá-lo através da geracão de um erro de compilação.
-
-As regras anteriores foram introduzidas para garantir a passagem de uma referência direta para o espaço de memória do valor passado através de parâmetro ao método aquando da sua invocação. 
+No exemplo anterior, `Guid.Empty` produz um tipo cuja identidade não é convertível no tipo `object`. Ao detetar este problema, o compilador acaba por sinalizá-lo através da geracão de um erro de compilação. Estas regras foram introduzidas para garantir a passagem segura de uma referência direta para o espaço de memória do valor passado através de parâmetro ao método aquando da sua invocação. 
 
 Antes de terminarmos esta secção, resta-nos referir que, se ainda o desejarmos, podemos alimentar parâmetros *in* com valores "literais" (desde que estes não sejam anotados com o qualificador `in`):
 
@@ -155,16 +152,16 @@ Calculadora.Duplica(in 2); //oops
 Calculadora.Duplica(2); //ok
 ```
 
-A passagem de um valor literal ao método `Duplica` segue os mesmos princípios de uma passagem por valor tradicional. Ao contrário do que se possa pensar, isto não implica uma alteração à regras apresentadas até ao momento (ou mesmo a adição de uma nova regra). E isto porque, ao encontrar código semelhante ao anterior, o compilador efetua uma transformação semelhante à apresentada no excerto seguinte:
+A passagem de um valor literal ao método `Duplica` segue os mesmos princípios de uma passagem por valor tradicional. Ao encontrar código semelhante ao anterior, o compilador efetua uma transformação semelhante à apresentada no excerto seguinte:
 
 ```cs
 var aux = 2;
 Calculadora.Duplica(in aux); //ok
 ```
 
-Portanto, o compilador começa por criar uma variável que é inicializada com uma cópia do valor 2. Em seguida, essa cópia é passada por referência de leitura ao método `Duplica`. Portanto, a passagem do valor literal não invalida nenhuma das regras apresentadas até ao momento (note-se como o compilador transforma o valor literal num *lvalue* antes de passá-lo ao método). Na realidade, ao permitir a passagem direta do valor literal, o compilador acaba apenas por nos poupar algum trabalho extra.
+Portanto, o compilador começa por criar uma variável que é inicializada com uma cópia do valor 2. Em seguida, essa cópia é passada através de uma referência de leitura ao método `Duplica`. Portanto, a passagem do valor literal não invalida nenhuma das regras apresentadas até ao momento, já que, na realidade, é transformada pelo num *lvalue* que, por sua vez, é usado para inicializar o parâmetro aquando da invocação do método. Na realidade, ao permitir a passagem direta do valor literal, o compilador acaba apenas por nos poupar algum trabalho extra.
 
-A discussão anterior permite-nos concluir que  criação de variáveis temporárias é necessária é alguns casos para garantir que os parâmetros anotados com o qualificador `in` recebem sempre *lvalues*. Para além do cenário anterior (onde um valor literal foi passado ao método sem ser anotado com o qualificador `in`), a aplicação de um valor predefinido a um parâmetros deste tipo também pode resultar na criação de um valor temporário:
+A discussão anterior permite-nos concluir que  criação automática de variáveis temporárias é necessária em alguns casos para garantir que os parâmetros anotados com o qualificador `in` recebem sempre *lvalues*. Para além do cenário anterior (onde um valor literal foi passado ao método sem ser anotado com o qualificador `in`), a aplicação de um valor predefinido a um parâmetros deste tipo também pode resultar na criação de um valor temporário:
 
 ```cs
 public static int Duplica(in int x  = 2)
@@ -175,7 +172,7 @@ public static int Duplica(in int x  = 2)
 Calculadora.Duplica(); //criada var temporaria inicializada com valor 2
 ```
 
-No que diz respeito à captura de parâmetros caraterística dos métodos assíncronos e das expressões *Lambda*, o comportamento é precisamente o mesmo que carateriza o uso dos qualificadores `ref` e `out´. Portanto, estes parâmetros:
+No que diz respeito à captura de parâmetros caraterística dos métodos assíncronos e das expressões *Lambda*, o comportamento é precisamente o mesmo que carateriza o uso dos qualificadores `ref` e `out`. Portanto, estes parâmetros:
 * não podem ser capturados nas *closures*;
 * não podem ser utilizados em *iterators*;
 * não são permitidos em métodos assíncronos (`async/await`). 
@@ -185,9 +182,10 @@ No que diz respeito à captura de parâmetros caraterística dos métodos assín
 
 A versão 7.2 da linguagem introduz ainda o conceito de devolução por referência de elementos dos chamados tipo por valor: para isso, temos de anotar o tipo de retorno do membro com os termos `ref readonly`. Qualquer tentativa de modificar um valor devolvido por um método cujo tipo de retorno tenha sido anotado com estes qualificadores é automaticamente detetada pelo compilador e transformada em erro de compilação. 
 
+
 ### Devolução de valores a partir de membros anotados com ´ref readonly`
 
-Regressando ao nosso exemplo baseado no tipo `Ponto`, é bem provável que existam várias operações que necessitem de utilizar o chamado ponto de origem, caraterizado pelas coordenadas (0,0). Nestes casos, podíamos anotar o tipo de retorno de um método ou propriedade utilizada para este objetivo com os termos `ref readonly`:
+Regressando ao nosso exemplo baseado no tipo `Ponto`, é bem provável que existam várias operações que necessitem de utilizar o chamado ponto de origem, caraterizado pelas coordenadas (0,0). A utilização de uma propriedade que devolve uma referência de leitura para um campo interno é uma boa solução para este cenário. Portanto, vamos adicionar à nossa classe uma nova propriedade designada por `Origem` e anotá-la com os termos `ref readonly`:
 
 ```cs
 public struct Ponto
@@ -231,9 +229,9 @@ A partir desta altura, qualquer tentativa de modificar o valor referenciado pela
 
 # Tipo `readonly struct`
 
-Como vimos, a devolução de referências de leitura para elementos do tipo por valor é possibilitada pelo uso de `ref readonly` aos tipos de retorno de um membro. Contudo, a definição de métodos para garantir o uso de referências de leitura para elementos destes tipo pode não fazer sendto. Foi a pensar neste (e noutros cenários) que a equipa decidiu permitir a aplicação do termo `readonly` à definição de uma `struct`.
+Como vimos, a devolução de referências de leitura para elementos do tipo por valor é possibilitada pelo uso de `ref readonly` aos tipos de retorno de um membro. Contudo, a criação explícita de métodos para garantir o uso de referências de leitura para elementos destes tipo pode não fazer sentido. Foi a pensar neste (e noutros cenários) que a equipa decidiu permitir a aplicação do termo `readonly` à definição de uma `struct`.
 
-Quando aplicamos este termo a uma `struct`, o compilador garante que todos os seus membros passam a ser de leitura. Por outras palavras, ao aplicarmos este termo, temos a garantia de que a `struct` passa a ser imutável. A aplicação deste termo permite ainda outras otimizações. Por exemplo, podemos aplicar o qualificador `in` em todos os locais onde uma `struct`deste tipo for passada a um método através de parâmetro. Para além disso, o próprio compilador gera código mais eficiente para aceder aos membros de uma estrutura deste tipo: nestes casos, o valor `this` é mesmo passado por referência ao membro através de um parâmetro *in* (em vez de ser criada uma cópia como acontece normalmente).
+Quando aplicamos este termo a uma `struct`, o compilador garante que todos os seus membros passam a ser de leitura. Por outras palavras, ao aplicarmos este termo, temos a garantia de que a `struct` passa a ser imutável. A aplicação deste termo permite ainda outras otimizações. Por exemplo, podemos aplicar o qualificador `in` em todos os locais onde uma `struct`deste tipo for passada a um método através de um parâmetro. Para além disso, o próprio compilador gera código mais eficiente no acesso aos membros de uma estrutura deste tipo: nestes casos, o valor `this` é mesmo passado por referência ao membro através de um parâmetro *in* (em vez de ser criada uma cópia como acontece normalmente).
 
 Para ilustrarmos a criação deste tipo de estrutura, vamos modificar o tipo `Ponto` que foi introduzido na secção anterior:
 
@@ -248,26 +246,24 @@ public readonly struct Ponto
 }
 ```
 
-A aplicação deste qualificador a uma `struct`tem algumas implicações. Uma delas (que, aliás, podemos ver no exemplo anterior) passa pela necessidade de todos os campos terem de ser definidos como campos de leitura (note-se o uso do qualificador `readonly`). Eventuais auto-propriedades definidas por `struct` deste tipo também têm de ser de leitura apenas e não podem conter os chamados *field-like events* (declarados através do termo `event`).
+Como é possível verifivar, a aplicação deste qualificador a uma `struct`tem algumas implicações. Uma delas (que, aliás, podemos ver no exemplo anterior) passa pela necessidade de todos os campos terem de ser definidos como campos de leitura (note-se o uso do qualificador `readonly` na definição dos campos). Eventuais auto-propriedades que venham a ser definidas em `struct` deste tipo também têm de ser de leitura apenas e não podem conter os chamados *field-like events* (declarados através do termo `event`).
 
 
 # Tipo `ref struct`
 
-Este novo tipo permite-nos definir um tipo por valor que apenas deve ser alocado na *stack*. Por outras palavras, estes tipos não podem ser definidos como membros dos chamados tipos por referência. A principal razão para a introdução destes tipos foi o novo tipo [Span<T>](https://blogs.msdn.microsoft.com/dotnet/2017/11/15/welcome-to-c-7-2-and-span/), que promete revolucionar a forma como trabalhamos com porções de memória em código C#. Internamente, este novo tipo contém apenas dois membros: um apontador e um campo que indica o tamanho da memória gerida pelo *span* (na realidade, este tipo é implementado de forma "mágica", já que a linguagem não permite o uso de apontadores em contextos seguros - isto é, fora de blocos *unsafe*). 
+Este novo tipo permite-nos criar um tipo por valor que apenas deve ser alocado na *stack*. Por outras palavras, estes tipos não podem ser definidos como membros dos chamados tipos por referência. A principal razão para a introdução deste novo qualificador foi a introdução do novo tipo [Span<T>](https://blogs.msdn.microsoft.com/dotnet/2017/11/15/welcome-to-c-7-2-and-span/), que promete revolucionar a forma como trabalhamos com porções de memória em  .NET. Internamente, este novo tipo contém apenas dois membros: um apontador e um campo que indica o tamanho da memória gerida pelo *span* (na realidade, este tipo é implementado de forma "mágica", já que a linguagem não permite o uso de apontadores em contextos seguros - isto é, fora de blocos *unsafe*). Ao restringirmos  este elemento à *stack*, passamos a evitar alguns erros problemáticos (ex.: *out od range*, violações de *type safety*, ext.).
 
-Na prática, isto significa que não é possível garantir a modificação de ambos os campos da estrutura de forma atómica se este elemento pudesse ser alocado na *heap*. Ao restringirmos  este elemento à *stack*, passamos a evitar alguns erros problemáticos (ex.: *out od range*, violações de *type safety*, ext.).
-
-A introdução deste novo tipo traz um conjunto de novas regras que contribuem para que o seu uso seja seguro:
-* um elemento deste tipo nãoestá sujeito a operações de *boxing*;
-* estes elementos não podem ser definidos como membros de tipos por referência ou de tipos por valor regulares;
+A introdução deste novo tipo traz consigo um conjunto de novas regras que contribuem para que o seu uso seja seguro:
+* um elemento deste tipo não está sujeito a operações de *boxing*;
+* estes elementos não podem ser definidos como membros de tipos por referência ou de tipos por valor "regulares";
 * estes elementos não podem ser definidos como variáveis no interior de métodos assíncronos, expressões *lambda*, funções locais ou *iterators*.
 
 
 ## Conclusão
 
-Este capítulo dedicou-se à análise de algumas das novas funcionalidades introduzidas pelo C# 7.2 que nos permitem utilizar a referências para tipos por valor no código C# que escrevemos. Como foi possível verificar, estas novas funcionalidades introduzidas pelo C# 7.2 complementam as introduzidas pela versão 7.1. Portanto, mantém-se a tónica de melhorar a linguagem por forma a otimizar o código escrito naqueles casos onde é necessário reduzir as alocações por questões de performance.
+Este capítulo dedicou-se à análise de algumas das novas funcionalidades introduzidas pelo C# 7.2 que nos permitem utilizar a referências para tipos por valor no código C# que escrevemos. Como foi possível verificar, estas novas funcionalidades introduzidas pelo C# 7.2 complementam as introduzidas pela versão 7.1. Portanto, mantém-se a tónica de melhorar a linguagem por forma a otimizar o código escrito em situações onde é necessário reduzir as alocações por questões de performance.
 
-No próximo capítulo, continuamos a analisar as novidades introduzidas pelo C# 7.2 e vamos ver como a versão 7.2 permite o uso de novos modificadores de acesso e define novas regras para definição dos valores dos parâmetros passados a um método.
+No próximo capítulo, continuamos a analisar as novidades introduzidas pelo C# 7.2 e vamos ver como a versão 7.2 permite o uso de novos modificadores de acesso e define novas regras para inicialização dos valores dos parâmetros passados a um método.
 
 
 ### Bibliografia
