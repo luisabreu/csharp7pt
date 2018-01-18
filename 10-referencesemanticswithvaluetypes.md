@@ -267,7 +267,9 @@ No próximo capítulo, continuamos a analisar as novidades introduzidas pelo C# 
 
 
 ### Bibliografia
-["What's new in C# 7.2"](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7-2)
+["What's new in C# 7.2"](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7-2)<br>
 ["Reference semantics with value types"](https://docs.microsoft.com/en-us/dotnet/csharp/reference-semantics-with-value-types
-)
-["Readonly references"](https://github.com/dotnet/csharplang/blob/master/proposals/csharp-7.2/readonly-ref.md)
+)<br>
+["Readonly references"](https://github.com/dotnet/csharplang/blob/master/proposals/csharp-7.2/readonly-ref.md)<br>
+
+[Anterior](9-throwexpressions.md) [Índice](index.md) [Próximo](11-notrailingnamedarguments.md)

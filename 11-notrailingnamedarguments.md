@@ -88,5 +88,7 @@ Ao longo deste capítulo, apresentámos as principais caraterísticas associadas
 
 ### Bibliografia
 
-[private protected](https://github.com/dotnet/csharplang/blob/master/proposals/csharp-7.2/private-protected.md)
-[Champion "Non-trailing named arguments"](https://github.com/dotnet/csharplang/issues/570)
+[private protected](https://github.com/dotnet/csharplang/blob/master/proposals/csharp-7.2/private-protected.md) <br>
+[Champion "Non-trailing named arguments"](https://github.com/dotnet/csharplang/issues/570) <br>
+
+[Anterior](10-referencesemanticswithvaluetypes.md) [Índice](index.md)

@@ -89,25 +89,19 @@ public enum Opcoes
 }
 ```
 
-Nesta altura, o leitor pode sentir-se tentado a utilizar o separador de dígitos para separar o prefixo da base do número de forma a melhorar ainda mais a legibilidade do código. Infelizmente, isso não é possível, já que a linguagem não permite a colocação do separador de dígitos imediatamente a seguir ao prefixo nem no final do número.
+Nesta altura, o leitor pode sentir-se tentado a utilizar o separador de dígitos para separar o prefixo da base do número de forma a melhorar ainda mais a legibilidade do código. Inicialmente, isto não era possível, já que a primeira versão da linguagem que introduziu esta funcionalidade não permitia a colocação do separador de dígitos imediatamente a seguir ao prefixo nem no final do número. Com o lançamento da versão 7.2, esta regra foi mudada, sendo que o separador de digitos já pode passar a ser colocado imediatamente a seguir ao prefixo.
 
-Por outras palavras, o código apresentado no excerto seguinte não compila: 
+O excerto seguinte ilustra estes pontos: 
 
 ```cs
-var aux1 = 0b_0000_0001; // ERRO
+var aux1 = 0b_0000_0001; // ERRO antes 7.2; OK a partir de 7.
 var aux2 = 0b0000_0001_; // ERRO
-```
-
-Uma possível solução para este problema passa pela utilização de dígitos de *padding* (o dígito a utilizar é o 0). O excerto seguinte ilustra o uso desta estratégia:
-
-```cs
-var aux = 0b0_0000_0001;
 ```
 
 Por outro lado, e se assim o desejarmos, podemos mesmo utilizar consecutivamente o separador de dígitos. Por exemplo, no excerto seguinte recorremos a esta estratégia para fazer com que os grupos de dígitos de um número sejam bem legíveis:
 
 ```cs
-var aux = 0b0__0000________0001;
+var aux = 0b__0000________0001;
 ```
 
 Pessoalmente, parece-nos que uma boa utilização do separador de dígitos contribuirá sobremaneira para melhorar a legibilidade do valor final.
@@ -147,5 +141,6 @@ Parece-nos, contudo, que se somarmos todas novidades introduzidas por esta vers�
 
 ["C# 7: Binary Literals and Numeric Literal Digit Separators"](http://blog.somewhatabstract.com/2017/01/02/c7-binary-literals-and-numeric-literal-digit-separators/) <br>
 ["What's new in C# 7"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/csharp-7#numeric-literal-syntax-improvements) <br>
+[Allow digit separator after 0b or 0x](https://github.com/dotnet/csharplang/blob/master/proposals/csharp-7.2/leading-separator.md)
 
-[Anterior](8-throwexpressions.md) [Índice](index.md)
+[Anterior](8-throwexpressions.md) [Índice](index.md) [Próximo](10-referencesemanticswithvaluetypes.md)
