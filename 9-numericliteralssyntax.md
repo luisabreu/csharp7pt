@@ -143,4 +143,4 @@ Parece-nos, contudo, que se somarmos todas novidades introduzidas por esta vers�
 ["What's new in C# 7"](https://docs.microsoft.com/en-us/dotnet/articles/csharp/csharp-7#numeric-literal-syntax-improvements) <br>
 [Allow digit separator after 0b or 0x](https://github.com/dotnet/csharplang/blob/master/proposals/csharp-7.2/leading-separator.md)
 
-[Anterior](8-throwexpressions.md) [Índice](index.md) [Próximo](10-referencesemanticswithvaluetypes.md)
+[Anterior](9-numericliteralssyntax.md) [Índice](index.md) [Próximo](10-referencesemanticswithvaluetypes.md)
