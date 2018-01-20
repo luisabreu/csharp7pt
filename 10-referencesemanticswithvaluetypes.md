@@ -1,4 +1,4 @@
-# Tipos por valor (*value types*) com comportamento de tipos por referência (*reference types*)
+# Tipos por valor (*value types*) utilizados como referências
 
 Desdes os seus primórdios, a plataforma .NET caraterizou sempre os tipos em duas categorias. De um lado, temos os chamados tipos por valor (também conhecidos por *value types*). Do outro, temos os tipos por referência (*reference types*). Como seria de esperar, cada um possui vantagens e desvantagens. Uma das principais vantagens inerentes ao uso dos tipos por valor reside no facto de podermos criar elementos deste tipo sem que isso resulte em alocações efetuadas na *heap*. Como é do conhecimento geral, a gestão automática de memória efetuada pelo *GC* pode introduzir algumas penalizações a nível de *performance*, pelo que a sua não utilização pode, em alguns cenários, melhorar a *performance* de uma aplicação.
 

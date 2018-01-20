@@ -85,7 +85,17 @@ Até ao lançamento do C# 7, o termo reservado `throw` estava reservado apenas p
 Com o C# 7, passamos a poder representar números inteiros em formato binário. Para além disso, a legibilidade do código é melhorada através da introdução de um carácter que desempenha o papel de separador. Neste capítulo, apresentamos alguns exemplos que justificam a introdução desta funcionalidade e que mostram como a nova sintaxe pode contribuir para melhorar a legibilidade do código que escrevemos.
 
 
-## Nota rápida sobre a versão 7.1 da linguagem
+### [Capítulo 10](10-referencesemanticswithvaluetypes.md): Tipos por valor utilizados como referências
+
+Com o C# 7, a linguagem deu início à introdução de um conjunto de funcionalidades que tentam otimizar o uso dos chamados *value types*. Como veremos neste capítulo, as versões seguintes (7.1 e 7.2) deram continuidade a esta tendência, através da introdução dos conceitos de parâmetro *in* (qualificador `in`), de devolução de uma referência de leitura para um valor (`ref reafonly`), de *structs* de leitura (`readonly struct`) e de *structs* de referência (`ref struct`).
+
+
+### [Capítulo 11](11-notrailingnamedarguments.md): Outras novidades do C# 7.2
+
+Neste capítulo, encerramos este livro com a apresentação de duas novas funcionalidades introduzidas pelo C# 7.2: o novo acesso `private protected` e as novas regras que regem o uso de parâmetros nomeados. Uma vez mais, estamos perante duas pequenas funcionalidades que vêm colmatar algumas lacunas que foram detetadas com o uso da linguagem ao longo dos últimos anos
+
+
+## Nota rápida sobre a versão 7.1 (e seguintes) da linguagem
 
 O lançamento da versão 7.1 da linguagem C# constitui um marco importante da linguagem. A partir desta altura, passamos a ter a possibilidade de configurar o compilador para utilizar apenas as funcionalidades introduzidas por uma determinada versão da linguagem através do uso do chamado meacnismo de seleção da linguagem (*language version selection*). A introdução deste mecanismo de configuração permite-nos evoluir a versão da linguagem utilizada, sem que isso implique instalação de novas ferramentas de desenvolvimento.
 
