@@ -19,5 +19,7 @@ Sugestões e correções são sempre bem vindas!
 [Funções locais](7-localfunctions.md)<br>
 [Expressões *throw*](8-throwexpressions.md)<br>
 [Sintaxe dos literais numéricos](9-numericliteralssyntax.md)<br>
+[Tipos por valor (*value types*) utilizados como referências](10-referencesemanticswithvaluetypes.md)<br>
+[Outras novidades do C# 7.2](11-notrailingnamedarguments.md)<br>
 
 [Próximo](I-dedicatoria.md)
